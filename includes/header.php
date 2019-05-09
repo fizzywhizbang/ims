@@ -29,8 +29,11 @@
   <script src="assests/jquery-ui/jquery-ui.min.js"></script>
 
   <!-- bootstrap js -->
-	<script src="assests/bootstrap/js/bootstrap.min.js"></script>
-
+  <script src="assests/bootstrap/js/bootstrap.min.js"></script>
+  
+  <!-- print pdf -->
+  <!-- <script src="https://unpkg.com/jspdf@latest/dist/jspdf.min.js"></script> -->
+  
 </head>
 <body>
 
@@ -46,8 +49,8 @@
         <span class="icon-bar"></span>
       </button>
       <!-- <a class="navbar-brand" href="#">Brand</a> -->
-	  <a class="navbar-brand" href="#" style="padding:0px;">
-                    <img src="logo.png" alt="">
+	  <a class="navbar-brand" href="index.php" style="padding:0px;">
+    <h3><?PHP echo $ims_companyname;?></h3>
                 </a>
     </div>
 
@@ -65,6 +68,9 @@
 		<?php } ?>
 		<?php if(isset($_SESSION['userId']) && $_SESSION['userId']==1) { ?>
         <li id="navProduct"><a href="product.php"> <i class="glyphicon glyphicon-ruble"></i> Product </a></li> 
+		<?php } ?>
+    <?php if(isset($_SESSION['userId']) && $_SESSION['userId']==1) { ?>
+        <li id="navSystem"><a href="system.php"> <i class="glyphicon glyphicon-cog"></i> System Settings </a></li> 
 		<?php } ?>
 		
         <li class="dropdown" id="navOrder">

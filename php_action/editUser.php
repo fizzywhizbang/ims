@@ -10,7 +10,7 @@ if($_POST) {
 	$userid 		= $_POST['userid'];
 
 				
-	$sql = "UPDATE users SET username = '$edituserName', password = '$editPassword' WHERE user_id = $userid ";
+	$sql = "UPDATE ".$db_prefix."users SET username = '$edituserName', password = '$editPassword' WHERE user_id = $userid ";
 
 	if($connect->query($sql) === TRUE) {
 		$valid['success'] = true;

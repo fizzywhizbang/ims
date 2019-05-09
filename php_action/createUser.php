@@ -11,7 +11,7 @@ if($_POST) {
   $uemail 			= $_POST['uemail'];
 
 	
-				$sql = "INSERT INTO users (username, password,email) 
+				$sql = "INSERT INTO ".$db_prefix."users (username, password,email) 
 				VALUES ('$userName', '$upassword' , '$uemail')";
 				if($connect->query($sql) === TRUE) {
 					$valid['success'] = true;

@@ -150,40 +150,39 @@ $orderItemResult = $connect->query($orderItemSql);
                      <td style="width: 218px; border-top-style: solid; border-right-style: solid; border-bottom-style: solid; border-top-width: thin; border-right-width: thin; border-bottom-width: thin; border-top-color: black; border-right-color: black; border-bottom-color: black;">'.$subTotal.'</td>
                   </tr>
                   <tr>
-                     <td colspan="3" style="border-top: 1px solid black;border-bottom: 1px solid black;border-left: 1px solid black;padding: 5px;">Neft For:- Bank Name</td>
+                     <td colspan="3" style="border-left: 1px solid black;padding: 5px;">&nbsp;</td>
                      <td rowspan="2" style="border-bottom: 1px solid black;width: 199px;color: white;background-color: black;padding-left: 5px;-webkit-print-color-adjust: exact;">S.G.S.T. 9%</td>
                      <td rowspan="2" style="border-bottom: 1px solid black;width: 288px;border-right: 1px solid black;">'.$cgst.'</td>
                   </tr>
                   <tr>
-                     <td colspan="3" style="border-bottom: 1px solid black;width: 859px;border-left: 1px solid black;padding: 5px;">Branch:- branch Address</td>
+                     <td colspan="3" style="width: 859px;border-left: 1px solid black;padding: 5px;"></td>
                   </tr>
                   <tr>
-                     <td colspan="3" style="border-bottom: 1px solid black;border-left: 1px solid black;padding: 5px;">Bank IFSC CODE:- 78945612301</td>
+                     <td colspan="3" style="border-left: 1px solid black;padding: 5px;">&nbsp;</td>
                      <td rowspan="2" style="border-bottom: 1px solid black;width: 149px;background-color: black;color: white;padding-left: 5px;-webkit-print-color-adjust: exact;">C.G.S.T. 9%</td>
                      <td rowspan="2" style="width:218px;border-bottom: 1px solid black;border-right: 1px solid black;">'.$cgst.'
                      </td>
                   </tr>
                   <tr>
-                     <td colspan="3" style="border-bottom: 1px solid black;border-left: 1px solid black;padding: 5px;">AC. HO. Name:- Comapany Name</td>
+                     <td colspan="3" style="border-bottom: 1px solid black;border-left: 1px solid black;padding: 5px;"></td>
                   </tr>
                   <tr>
-                     <td colspan="3" style="border-bottom: 1px solid black;border-left: 1px solid black;padding: 5px;">AC.NO. :- lorem ipsum</td>
+                     <td colspan="3" style="border-left: 1px solid black;padding: 5px;">&nbsp;</td>
                      <td style="border-bottom: 1px solid black;background-color: black;color: white;padding: 5px;-webkit-print-color-adjust: exact;">I.G.S.T. 18%</td>
                      <td style="border-bottom: 1px solid black;border-right: 1px solid black;">'.$igst.'</td>
                   </tr>
                   <tr>
-                     <td colspan="3" style="border-left: 1px solid black;border-bottom: 1px solid black;color: red;padding: 5px;">Amount in words</td>
+                     <td colspan="3" style="border-left: 1px solid black;color: red;padding: 5px;">Amount in words</td>
                      <td style="border-bottom: 1px solid #fff;background-color: black;color: white;padding: 5px;-webkit-print-color-adjust: exact;">G. Total</td>
                      <td style="border-bottom: 1px solid black;border-right: 1px solid;">'.$total.'</td>
                   </tr>
                   <tr>
-                     <td colspan="3" style="border-left: 1px solid black;border-bottom: 1px solid black;padding: 5px;border-right: 1px solid black;">* Subject to lorem ipsum             <span style="float: right;"> E.&amp;.O.E.</span></td>
+                     <td colspan="3" style="border-left: 1px solid black;padding: 5px;border-right: 1px solid black;">&nbsp;</td>
                      <td rowspan="2" colspan="2" style="vertical-align: bottom;padding: 5px;color: red;border-right: 1px solid black;text-align: center;">for, Company Name</td>
                   </tr>
                   <tr>
                      <td colspan="3" style="border-left: 1px solid black;padding-left: 5px;border-right: 1px solid black;">
-                        * Intrest will be charged upon all acounts 
-                        <p style="margin: 0px;">remaning unpaid after due date</p>
+                        &nbsp;
                      </td>
                   </tr>
                </tbody>

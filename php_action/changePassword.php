@@ -19,7 +19,7 @@ if($_POST) {
 
 		if($newPassword == $conformPassword) {
 
-			$updateSql = "UPDATE users SET password = '$newPassword' WHERE user_id = {$userId}";
+			$updateSql = "UPDATE ".$db_prefix."users SET password = '$newPassword' WHERE user_id = {$userId}";
 			if($connect->query($updateSql) === TRUE) {
 				$valid['success'] = true;
 				$valid['messages'] = "Successfully Updated";		

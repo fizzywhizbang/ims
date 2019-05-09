@@ -4,7 +4,7 @@ require_once 'php_action/db_connect.php';
 session_start();
 
 if(isset($_SESSION['userId'])) {
-	header('location: http://localhost/inventory-management-system/dashboard.php');	
+	header('location: dashboard.php');	
 }
 
 $errors = array();
@@ -23,13 +23,13 @@ if($_POST) {
 			$errors[] = "Password is required";
 		}
 	} else {
-		$sql = "SELECT * FROM users WHERE username = '$username'";
+		$sql = "SELECT * FROM ".$db_prefix."users WHERE username = '$username'";
 		$result = $connect->query($sql);
 
 		if($result->num_rows == 1) {
 			$password = md5($password);
 			// exists
-			$mainSql = "SELECT * FROM users WHERE username = '$username' AND password = '$password'";
+			$mainSql = "SELECT * FROM ".$db_prefix."users WHERE username = '$username' AND password = '$password'";
 			$mainResult = $connect->query($mainSql);
 
 			if($mainResult->num_rows == 1) {
@@ -39,7 +39,7 @@ if($_POST) {
 				// set session
 				$_SESSION['userId'] = $user_id;
 
-				header('location: http://localhost/inventory-management-system/dashboard.php');	
+				header('location: dashboard.php');	
 			} else{
 				
 				$errors[] = "Incorrect username/password combination";
@@ -75,6 +75,8 @@ if($_POST) {
 
   <!-- bootstrap js -->
 	<script src="assests/bootstrap/js/bootstrap.min.js"></script>
+<?PHP //include("includes/header.php");?>
+
 </head>
 <body>
 	<div class="container">

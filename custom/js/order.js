@@ -4,13 +4,40 @@ $(document).ready(function() {
 	$("#paymentPlace").change(function(){
 		if($("#paymentPlace").val() == 2)
 		{
-			$(".gst").text("IGST 18%");
+			$(".gst").text("No Tax");
 		}
 		else
 		{
-			$(".gst").text("GST 18%");	
+			var tax = document.getElementById('taxrate').value
+			$(".gst").text("Tax " + tax);	
 		}
-});
+	});
+
+	$(document).ready(function(){
+			//client name autocomplete
+			$("#clientName").autocomplete({
+				source: function( request, response ) {
+						$.ajax( {
+							url: "php_action/fetchClients.php",
+							dataType: "json",
+							data: {
+								term: request.term
+							},
+							success: function( data ) {
+								response( data );
+							}
+						} );
+					},
+					minLength: 2,
+					delay: 400,
+			select: function (event, ui) {
+			 // Set selection
+			 $('#clientName').val(ui.item.label); // display the selected text
+				$('#clientContact').val(ui.item.value);
+			 return false;
+			}
+			} );
+	});
 
 	var divRequest = $(".div-request").text();
 
@@ -373,7 +400,7 @@ function printOrder(orderId = null) {
         mywindow.resizeTo(screen.width, screen.height);
 setTimeout(function() {
     mywindow.print();
-    mywindow.close();
+    //mywindow.close();
 }, 1250);
 
         //mywindow.print();
@@ -385,7 +412,7 @@ setTimeout(function() {
 } // /print order function
 
 function addRow() {
-	$("#addRowBtn").button("loading");
+	//$("#addRowBtn").button("loading");
 
 	var tableLength = $("#productTable tbody tr").length;
 
@@ -410,7 +437,7 @@ function addRow() {
 		type: 'post',
 		dataType: 'json',
 		success:function(response) {
-			$("#addRowBtn").button("reset");			
+			//$("#addRowBtn").button("reset");			
 
 			var tr = '<tr id="row'+count+'" class="'+arrayNumber+'">'+			  				
 				'<td>'+
@@ -437,7 +464,7 @@ function addRow() {
 				'</td>'+
 				'<td style="padding-left:20px;">'+
 					'<div class="form-group">'+
-					'<input type="number" name="quantity[]" id="quantity'+count+'" onkeyup="getTotal('+count+')" autocomplete="off" class="form-control" min="1" />'+
+					'<input type="number" name="quantity[]" id="quantity'+count+'" onkeyup="getTotal('+count+')" onclick="getTotal('+count+')" autocomplete="off" class="form-control" min="1" />'+
 					'</div>'+
 				'</td>'+
 				'<td style="padding-left:20px;">'+
@@ -445,7 +472,7 @@ function addRow() {
 					'<input type="hidden" name="totalValue[]" id="totalValue'+count+'" autocomplete="off" class="form-control" />'+
 				'</td>'+
 				'<td>'+
-					'<button class="btn btn-default removeProductRowBtn" type="button" onclick="removeProductRow('+count+')"><i class="glyphicon glyphicon-trash"></i></button>'+
+					'<button class="btn btn-default removeProductRowBtn" type="button" onclick="removeProductRow('+count+')"><i class="fas fa-trash"></i></button>'+
 				'</td>'+
 			'</tr>';
 			if(tableLength > 0) {							
@@ -576,10 +603,21 @@ function subAmount() {
 	$("#subTotalValue").val(totalSubAmount);
 
 	// vat
-	var vat = (Number($("#subTotal").val())/100) * 18;
-	vat = vat.toFixed(2);
-	$("#vat").val(vat);
-	$("#vatValue").val(vat);
+	// get tax rate from form
+	if($("#paymentPlace").val() == 2){
+		$("#vat").val("0");
+		$("#vatValue").val("0");
+	} else {
+		var tax = $("#taxrate").val();
+		tax = tax.replace("%","");
+		tax = Number(tax) / 100;
+		
+		var vat = Number($("#subTotal").val()) * tax;
+		vat = vat.toFixed(2);
+		$("#vat").val(vat);
+		$("#vatValue").val(vat);
+	}
+	
 
 	// total amount
 	var totalAmount = (Number($("#subTotal").val()) + Number($("#vat").val()));

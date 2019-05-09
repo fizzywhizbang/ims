@@ -26,7 +26,7 @@ SET time_zone = "+00:00";
 -- Table structure for table `brands`
 --
 
-CREATE TABLE `brands` (
+CREATE TABLE `ims_brands` (
   `brand_id` int(11) NOT NULL,
   `brand_name` varchar(255) NOT NULL,
   `brand_active` int(11) NOT NULL DEFAULT '0',
@@ -39,7 +39,7 @@ CREATE TABLE `brands` (
 -- Table structure for table `categories`
 --
 
-CREATE TABLE `categories` (
+CREATE TABLE `ims_categories` (
   `categories_id` int(11) NOT NULL,
   `categories_name` varchar(255) NOT NULL,
   `categories_active` int(11) NOT NULL DEFAULT '0',
@@ -52,7 +52,7 @@ CREATE TABLE `categories` (
 -- Table structure for table `orders`
 --
 
-CREATE TABLE `orders` (
+CREATE TABLE `ims_orders` (
   `order_id` int(11) NOT NULL,
   `order_date` date NOT NULL,
   `client_name` varchar(255) NOT NULL,
@@ -78,7 +78,7 @@ CREATE TABLE `orders` (
 -- Table structure for table `order_item`
 --
 
-CREATE TABLE `order_item` (
+CREATE TABLE `ims_order_item` (
   `order_item_id` int(11) NOT NULL,
   `order_id` int(11) NOT NULL DEFAULT '0',
   `product_id` int(11) NOT NULL DEFAULT '0',
@@ -94,7 +94,7 @@ CREATE TABLE `order_item` (
 -- Table structure for table `product`
 --
 
-CREATE TABLE `product` (
+CREATE TABLE `ims_product` (
   `product_id` int(11) NOT NULL,
   `product_name` varchar(255) NOT NULL,
   `product_image` text NOT NULL,
@@ -112,7 +112,7 @@ CREATE TABLE `product` (
 -- Table structure for table `users`
 --
 
-CREATE TABLE `users` (
+CREATE TABLE `ims_users` (
   `user_id` int(11) NOT NULL,
   `username` varchar(255) NOT NULL,
   `password` varchar(255) NOT NULL,
@@ -123,7 +123,7 @@ CREATE TABLE `users` (
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`user_id`, `username`, `password`, `email`) VALUES
+INSERT INTO `ims_users` (`user_id`, `username`, `password`, `email`) VALUES
 (1, 'admin', '21232f297a57a5a743894a0e4a801fc3', '');
 
 --
@@ -133,37 +133,37 @@ INSERT INTO `users` (`user_id`, `username`, `password`, `email`) VALUES
 --
 -- Indexes for table `brands`
 --
-ALTER TABLE `brands`
+ALTER TABLE `ims_brands`
   ADD PRIMARY KEY (`brand_id`);
 
 --
 -- Indexes for table `categories`
 --
-ALTER TABLE `categories`
+ALTER TABLE `ims_categories`
   ADD PRIMARY KEY (`categories_id`);
 
 --
 -- Indexes for table `orders`
 --
-ALTER TABLE `orders`
+ALTER TABLE `ims_orders`
   ADD PRIMARY KEY (`order_id`);
 
 --
 -- Indexes for table `order_item`
 --
-ALTER TABLE `order_item`
+ALTER TABLE `ims_order_item`
   ADD PRIMARY KEY (`order_item_id`);
 
 --
 -- Indexes for table `product`
 --
-ALTER TABLE `product`
+ALTER TABLE `ims_product`
   ADD PRIMARY KEY (`product_id`);
 
 --
 -- Indexes for table `users`
 --
-ALTER TABLE `users`
+ALTER TABLE `ims_users`
   ADD PRIMARY KEY (`user_id`);
 
 --
@@ -173,32 +173,32 @@ ALTER TABLE `users`
 --
 -- AUTO_INCREMENT for table `brands`
 --
-ALTER TABLE `brands`
+ALTER TABLE `ims_brands`
   MODIFY `brand_id` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `categories`
 --
-ALTER TABLE `categories`
+ALTER TABLE `ims_categories`
   MODIFY `categories_id` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `orders`
 --
-ALTER TABLE `orders`
+ALTER TABLE `ims_orders`
   MODIFY `order_id` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `order_item`
 --
-ALTER TABLE `order_item`
+ALTER TABLE `ims_order_item`
   MODIFY `order_item_id` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `product`
 --
-ALTER TABLE `product`
+ALTER TABLE `ims_product`
   MODIFY `product_id` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `users`
 --
-ALTER TABLE `users`
+ALTER TABLE `ims_users`
   MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

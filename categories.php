@@ -1,25 +1,27 @@
-<?php require_once 'includes/header.php'; ?>
+<?php require_once 'includes/header2.php'; ?>
 
 
 <div class="row">
 	<div class="col-md-12">
 
 		<ol class="breadcrumb">
-		  <li><a href="dashboard.php">Home</a></li>		  
-		  <li class="active">Category</li>
+		  <li class="breadcrumb-item"><a  href="dashboard.php">Home</a></li>		  
+		  <li class="breadcrumb-item active">Category</li>
 		</ol>
 
-		<div class="panel panel-default">
-			<div class="panel-heading">
-				<div class="page-heading"> <i class="glyphicon glyphicon-edit"></i> Manage Categories</div>
+		<div class="card">
+			<div class="card-head bg-light">
+				<div class="card-title float-left text-blue"><i class="fas fa-edit"></i> Manage Categories</div>
+				<div class="div-action float-right">
+					<button class="btn btn-default button1 text-blue" data-toggle="modal" id="addCategoriesModalBtn" data-target="#addCategoriesModal"> <i class="fas fa-plus-square    "></i> Add Categories </button>
+				</div> 
 			</div> <!-- /panel-heading -->
-			<div class="panel-body">
+	
+			<div class="card-body">
 
 				<div class="remove-messages"></div>
 
-				<div class="div-action pull pull-right" style="padding-bottom:20px;">
-					<button class="btn btn-default button1" data-toggle="modal" id="addCategoriesModalBtn" data-target="#addCategoriesModal"> <i class="glyphicon glyphicon-plus-sign"></i> Add Categories </button>
-				</div> <!-- /div-action -->				
+				<!-- /div-action -->				
 				
 				<table class="table" id="manageCategoriesTable">
 					<thead>
@@ -45,24 +47,23 @@
 
     	<form class="form-horizontal" id="submitCategoriesForm" action="php_action/createCategories.php" method="POST">
 	      <div class="modal-header">
+				<h4 class="modal-title"><i class="fa fa-plus"></i> Add Categories</h4>
 	        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-	        <h4 class="modal-title"><i class="fa fa-plus"></i> Add Categories</h4>
+	        
 	      </div>
 	      <div class="modal-body">
 
 	      	<div id="add-categories-messages"></div>
 
-	        <div class="form-group">
-	        	<label for="categoriesName" class="col-sm-4 control-label">Categories Name: </label>
-	        	<label class="col-sm-1 control-label">: </label>
-				    <div class="col-sm-7">
+	        <div class="row">
+	        	<label for="categoriesName" class="col-sm-2 control-label">Name: </label>
+				    <div class="col-sm-10">
 				      <input type="text" class="form-control" id="categoriesName" placeholder="Categories Name" name="categoriesName" autocomplete="off">
 				    </div>
 	        </div> <!-- /form-group-->	         	        
-	        <div class="form-group">
-	        	<label for="categoriesStatus" class="col-sm-4 control-label">Status: </label>
-	        	<label class="col-sm-1 control-label">: </label>
-				    <div class="col-sm-7">
+	        <div class="row">
+	        	<label for="categoriesStatus" class="col-sm-2 control-label">Status: </label>
+				    <div class="col-sm-10">
 				      <select class="form-control" id="categoriesStatus" name="categoriesStatus">
 				      	<option value="">~~SELECT~~</option>
 				      	<option value="1">Available</option>
@@ -73,9 +74,9 @@
 	      </div> <!-- /modal-body -->
 	      
 	      <div class="modal-footer">
-	        <button type="button" class="btn btn-default" data-dismiss="modal"> <i class="glyphicon glyphicon-remove-sign"></i> Close</button>
+	        <button type="button" class="btn btn-default" data-dismiss="modal"> <i class="fas fa-window-close    "></i> Close</button>
 	        
-	        <button type="submit" class="btn btn-primary" id="createCategoriesBtn" data-loading-text="Loading..." autocomplete="off"> <i class="glyphicon glyphicon-ok-sign"></i> Save Changes</button>
+	        <button type="submit" class="btn btn-primary" id="createCategoriesBtn" data-loading-text="Loading..." autocomplete="off"> <i class="fas fa-thumbs-up"></i> Save Changes</button>
 	      </div> <!-- /modal-footer -->	      
      	</form> <!-- /.form -->	     
     </div> <!-- /modal-content -->    
@@ -91,30 +92,31 @@
     	
     	<form class="form-horizontal" id="editCategoriesForm" action="php_action/editCategories.php" method="POST">
 	      <div class="modal-header">
+				<h4 class="modal-title"><i class="fa fa-edit"></i> Edit Brand</h4>
 	        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-	        <h4 class="modal-title"><i class="fa fa-edit"></i> Edit Brand</h4>
+	        
 	      </div>
 	      <div class="modal-body">
 
 	      	<div id="edit-categories-messages"></div>
 
 	      	<div class="modal-loading div-hide" style="width:50px; margin:auto;padding-top:50px; padding-bottom:50px;">
-						<i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i>
+						<i class="fa fas-spinner fa-pulse fa-3x fa-fw"></i>
 						<span class="sr-only">Loading...</span>
 					</div>
 
 		      <div class="edit-categories-result">
-		      	<div class="form-group">
+		      	<div class="row">
 		        	<label for="editCategoriesName" class="col-sm-4 control-label">Categories Name: </label>
-		        	<label class="col-sm-1 control-label">: </label>
-					    <div class="col-sm-7">
+		        	
+					    <div class="col-sm-8">
 					      <input type="text" class="form-control" id="editCategoriesName" placeholder="Categories Name" name="editCategoriesName" autocomplete="off">
 					    </div>
 		        </div> <!-- /form-group-->	         	        
-		        <div class="form-group">
+		        <div class="row">
 		        	<label for="editCategoriesStatus" class="col-sm-4 control-label">Status: </label>
-		        	<label class="col-sm-1 control-label">: </label>
-					    <div class="col-sm-7">
+		        	
+					    <div class="col-sm-8">
 					      <select class="form-control" id="editCategoriesStatus" name="editCategoriesStatus">
 					      	<option value="">~~SELECT~~</option>
 					      	<option value="1">Available</option>
@@ -128,9 +130,9 @@
 	      </div> <!-- /modal-body -->
 	      
 	      <div class="modal-footer editCategoriesFooter">
-	        <button type="button" class="btn btn-default" data-dismiss="modal"> <i class="glyphicon glyphicon-remove-sign"></i> Close</button>
+	        <button type="button" class="btn btn-default" data-dismiss="modal"> <i class="fas fa-window-close    "></i> Close</button>
 	        
-	        <button type="submit" class="btn btn-success" id="editCategoriesBtn" data-loading-text="Loading..." autocomplete="off"> <i class="glyphicon glyphicon-ok-sign"></i> Save Changes</button>
+	        <button type="submit" class="btn btn-success" id="editCategoriesBtn" data-loading-text="Loading..." autocomplete="off"> <i class="fas fa-thumbs-up    "></i> Save Changes</button>
 	      </div>
 	      <!-- /modal-footer -->
      	</form>
@@ -147,15 +149,16 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
+			<h4 class="modal-title"><i class="glyphicon glyphicon-trash"></i> Remove Brand</h4>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title"><i class="glyphicon glyphicon-trash"></i> Remove Brand</h4>
+        
       </div>
       <div class="modal-body">
         <p>Do you really want to remove ?</p>
       </div>
       <div class="modal-footer removeCategoriesFooter">
-        <button type="button" class="btn btn-default" data-dismiss="modal"> <i class="glyphicon glyphicon-remove-sign"></i> Close</button>
-        <button type="button" class="btn btn-primary" id="removeCategoriesBtn" data-loading-text="Loading..."> <i class="glyphicon glyphicon-ok-sign"></i> Save changes</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal"> <i class="fas fa-window-close    "></i> Close</button>
+        <button type="button" class="btn btn-primary" id="removeCategoriesBtn" data-loading-text="Loading..."> <i class="fas fa-thumbs-up    "></i> Save changes</button>
       </div>
     </div><!-- /.modal-content -->
   </div><!-- /.modal-dialog -->

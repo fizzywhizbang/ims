@@ -24,7 +24,7 @@ if($_POST) {
   $userid 				= $_SESSION['userId'];
 
 				
-	$sql = "INSERT INTO orders (order_date, client_name, client_contact, sub_total, vat, total_amount, discount, grand_total, paid, due, payment_type, payment_status,payment_place, gstn,order_status,user_id) VALUES ('$orderDate', '$clientName', '$clientContact', '$subTotalValue', '$vatValue', '$totalAmountValue', '$discount', '$grandTotalValue', '$paid', '$dueValue', $paymentType, $paymentStatus,$paymentPlace,$gstn, 1,$userid)";
+	$sql = "INSERT INTO ".$db_prefix."orders (order_date, client_name, client_contact, sub_total, vat, total_amount, discount, grand_total, paid, due, payment_type, payment_status,payment_place, gstn,order_status,user_id) VALUES ('$orderDate', '$clientName', '$clientContact', '$subTotalValue', '$vatValue', '$totalAmountValue', '$discount', '$grandTotalValue', '$paid', '$dueValue', $paymentType, $paymentStatus,$paymentPlace,$gstn, 1,$userid)";
 	
 	$order_id;
 	$orderStatus = false;
@@ -40,18 +40,18 @@ if($_POST) {
 	$orderItemStatus = false;
 
 	for($x = 0; $x < count($_POST['productName']); $x++) {			
-		$updateProductQuantitySql = "SELECT product.quantity FROM product WHERE product.product_id = ".$_POST['productName'][$x]."";
+		$updateProductQuantitySql = "SELECT ".$db_prefix."product.quantity FROM ".$db_prefix."product WHERE ".$db_prefix."product.product_id = ".$_POST['productName'][$x]."";
 		$updateProductQuantityData = $connect->query($updateProductQuantitySql);
 		
 		
 		while ($updateProductQuantityResult = $updateProductQuantityData->fetch_row()) {
 			$updateQuantity[$x] = $updateProductQuantityResult[0] - $_POST['quantity'][$x];							
 				// update product table
-				$updateProductTable = "UPDATE product SET quantity = '".$updateQuantity[$x]."' WHERE product_id = ".$_POST['productName'][$x]."";
+				$updateProductTable = "UPDATE ".$db_prefix."product SET quantity = '".$updateQuantity[$x]."' WHERE product_id = ".$_POST['productName'][$x]."";
 				$connect->query($updateProductTable);
 
 				// add into order_item
-				$orderItemSql = "INSERT INTO order_item (order_id, product_id, quantity, rate, total, order_item_status) 
+				$orderItemSql = "INSERT INTO ".$db_prefix."order_item (order_id, product_id, quantity, rate, total, order_item_status) 
 				VALUES ('$order_id', '".$_POST['productName'][$x]."', '".$_POST['quantity'][$x]."', '".$_POST['rateValue'][$x]."', '".$_POST['totalValue'][$x]."', 1)";
 
 				$connect->query($orderItemSql);		

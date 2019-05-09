@@ -4,10 +4,13 @@ $(document).ready(function() {
 	// top nav bar 
 	$('#navProduct').addClass('active');
 	// manage product data table
-	manageProductTable = $('#manageProductTable').DataTable({
-		'ajax': 'php_action/fetchProduct.php',
-		'order': []
-	});
+
+	$(document).ready(function() {
+		$('#manageProductTable').DataTable( {
+			'ajax': 'php_action/fetchProduct.php',			
+			'order': []			
+		} );
+	} );
 
 	// add product modal btn clicked
 	$("#addProductModalBtn").unbind('click').bind('click', function() {
@@ -26,8 +29,8 @@ $(document).ready(function() {
 		    showCaption: false,
 		    browseLabel: '',
 		    removeLabel: '',
-		    browseIcon: '<i class="glyphicon glyphicon-folder-open"></i>',
-		    removeIcon: '<i class="glyphicon glyphicon-remove"></i>',
+		    browseIcon: ' <i class="fas fa-folder-open"></i>',
+		    removeIcon: '<i class="fas fa-trash"></i>',
 		    removeTitle: 'Cancel or reset changes',
 		    elErrorContainer: '#kv-avatar-errors-1',
 		    msgErrorClass: 'alert alert-block alert-danger',

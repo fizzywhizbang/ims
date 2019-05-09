@@ -1,15 +1,12 @@
 <?php 	
-
-
-
 require_once 'core.php';
 
-$sql = "SELECT product.product_id, product.product_name, product.product_image, product.brand_id,
- 		product.categories_id, product.quantity, product.rate, product.active, product.status, 
- 		brands.brand_name, categories.categories_name FROM product 
-		INNER JOIN brands ON product.brand_id = brands.brand_id 
-		INNER JOIN categories ON product.categories_id = categories.categories_id  
-		WHERE product.status = 1 AND product.quantity>0";
+$sql = "SELECT ".$db_prefix."product.product_id, ".$db_prefix."product.product_name, ".$db_prefix."product.product_image, ".$db_prefix."product.brand_id,
+".$db_prefix."product.categories_id, ".$db_prefix."product.quantity, ".$db_prefix."product.rate, ".$db_prefix."product.active, ".$db_prefix."product.status, 
+".$db_prefix."brands.brand_name, ".$db_prefix."categories.categories_name FROM ".$db_prefix."product 
+		INNER JOIN ".$db_prefix."brands ON ".$db_prefix."product.brand_id = ".$db_prefix."brands.brand_id 
+		INNER JOIN ".$db_prefix."categories ON ".$db_prefix."product.categories_id = ".$db_prefix."categories.categories_id  
+		WHERE ".$db_prefix."product.status = 1 AND ".$db_prefix."product.quantity > 0";
 
 $result = $connect->query($sql);
 
@@ -37,8 +34,8 @@ if($result->num_rows > 0) {
 	    Action <span class="caret"></span>
 	  </button>
 	  <ul class="dropdown-menu">
-	    <li><a type="button" data-toggle="modal" id="editProductModalBtn" data-target="#editProductModal" onclick="editProduct('.$productId.')"> <i class="glyphicon glyphicon-edit"></i> Edit</a></li>
-	    <li><a type="button" data-toggle="modal" data-target="#removeProductModal" id="removeProductModalBtn" onclick="removeProduct('.$productId.')"> <i class="glyphicon glyphicon-trash"></i> Remove</a></li>       
+	    <li><a type="button" data-toggle="modal" id="editProductModalBtn" class="dropdown-item" data-target="#editProductModal" onclick="editProduct('.$productId.')"> <i class="fas fa-edit    "></i> Edit</a></li>
+	    <li><a type="button" data-toggle="modal" data-target="#removeProductModal" class="dropdown-item" id="removeProductModalBtn" onclick="removeProduct('.$productId.')"> <i class="fas fa-trash    "></i> Remove</a></li>       
 	  </ul>
 	</div>';
 

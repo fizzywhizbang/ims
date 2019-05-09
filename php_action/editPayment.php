@@ -15,7 +15,7 @@ if($_POST) {
   $updatePaidAmount = $payAmount + $paidAmount;
   $updateDue = $grandTotal - $updatePaidAmount;
 
-	$sql = "UPDATE orders SET paid = '$updatePaidAmount', due = '$updateDue', payment_type = '$paymentType', payment_status = '$paymentStatus' WHERE order_id = {$orderId}";
+	$sql = "UPDATE ".$db_prefix."orders SET paid = '$updatePaidAmount', due = '$updateDue', payment_type = '$paymentType', payment_status = '$paymentStatus' WHERE order_id = {$orderId}";
 
 	if($connect->query($sql) === TRUE) {
 		$valid['success'] = true;

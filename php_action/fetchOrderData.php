@@ -6,8 +6,8 @@ $orderId = $_POST['orderId'];
 
 $valid = array('order' => array(), 'order_item' => array());
 
-$sql = "SELECT orders.order_id, orders.order_date, orders.client_name, orders.client_contact, orders.sub_total, orders.vat, orders.total_amount, orders.discount, orders.grand_total, orders.paid, orders.due, orders.payment_type, orders.payment_status FROM orders 	
-	WHERE orders.order_id = {$orderId}";
+$sql = "SELECT ".$db_prefix."orders.order_id, ".$db_prefix."orders.order_date, ".$db_prefix."orders.client_name, ".$db_prefix."orders.client_contact, ".$db_prefix."orders.sub_total, ".$db_prefix."orders.vat, ".$db_prefix."orders.total_amount, ".$db_prefix."orders.discount, ".$db_prefix."orders.grand_total, ".$db_prefix."orders.paid, ".$db_prefix."orders.due, ".$db_prefix."orders.payment_type, ".$db_prefix."orders.payment_status FROM ".$db_prefix."orders 	
+	WHERE ".$db_prefix."orders.order_id = {$orderId}";
 
 $result = $connect->query($sql);
 $data = $result->fetch_row();

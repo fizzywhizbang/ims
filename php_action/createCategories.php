@@ -9,7 +9,7 @@ if($_POST) {
 	$categoriesName = $_POST['categoriesName'];
   $categoriesStatus = $_POST['categoriesStatus']; 
 
-	$sql = "INSERT INTO categories (categories_name, categories_active, categories_status) 
+	$sql = "INSERT INTO ".$db_prefix."categories (categories_name, categories_active, categories_status) 
 	VALUES ('$categoriesName', '$categoriesStatus', 1)";
 
 	if($connect->query($sql) === TRUE) {

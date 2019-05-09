@@ -5,10 +5,19 @@ $(document).ready(function() {
 	$('#navBrand').addClass('active');
 	
 	// manage brand table
-	manageBrandTable = $("#manageBrandTable").DataTable({
-		'ajax': 'php_action/fetchBrand.php',
-		'order': []		
-	});
+	$(document).ready(function() {
+		$('#manageBrandTable').DataTable( {
+			'ajax': 'php_action/fetchBrand.php',
+			columnDefs:[
+				{
+					classname: 'dt-left stripe',
+					targets: '_all'
+				}
+			],
+			
+			'order': []			
+		} );
+	} );
 
 	// submit brand form function
 	$("#submitBrandForm").unbind('submit').bind('submit', function() {

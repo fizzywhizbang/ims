@@ -1,9 +1,11 @@
 <?php 	
 
+$webroot = "ims/";
+$db_prefix = "ims_";
 $localhost = "localhost";
-$username = "root";
-$password = "root";
-$dbname = "store";
+$username = "sparky";
+$password = "NGKD@t@b@se";
+$dbname = "sparky";
 
 // db connection
 $connect = new mysqli($localhost, $username, $password, $dbname);

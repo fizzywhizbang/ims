@@ -15,7 +15,7 @@ $type = explode('.', $_FILES['editProductImage']['name']);
 		if(is_uploaded_file($_FILES['editProductImage']['tmp_name'])) {			
 			if(move_uploaded_file($_FILES['editProductImage']['tmp_name'], $url)) {
 
-				$sql = "UPDATE product SET product_image = '$url' WHERE product_id = $productId";				
+				$sql = "UPDATE ".$db_prefix."product SET product_image = '$url' WHERE product_id = $productId";				
 
 				if($connect->query($sql) === TRUE) {									
 					$valid['success'] = true;
