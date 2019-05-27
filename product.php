@@ -215,7 +215,7 @@
 			        </div> <!-- /form-group-->	     	           	       
 
 			        <div class="modal-footer editProductPhotoFooter">
-				        <button type="button" class="btn btn-default" data-dismiss="modal"> <i class="fas fa-window-close    "></i> Close</button>
+				        <button type="button" class="btn btn-default" data-dismiss="modal"> <i class="fas fa-window-close"></i> Close</button>
 				        
 				        <!-- <button type="submit" class="btn btn-success" id="editProductImageBtn" data-loading-text="Loading..."> <i class="glyphicon glyphicon-ok-sign"></i> Save Changes</button> -->
 				      </div>
@@ -331,7 +331,7 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-			<h4 class="modal-title"><i class="fas fa-trash    "></i> Remove Product</h4>
+			<h4 class="modal-title"><i class="fas fa-trash"></i> Remove Product</h4>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
         
       </div>
@@ -342,8 +342,8 @@
         <p>Do you really want to remove ?</p>
       </div>
       <div class="modal-footer removeProductFooter">
-        <button type="button" class="btn btn-default" data-dismiss="modal"> <i class="fas fa-window-close    "></i> Close</button>
-        <button type="button" class="btn btn-primary" id="removeProductBtn" data-loading-text="Loading..."> <<i class="fas fa-thumbs-up    "></i> Save changes</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal"> <i class="fas fa-window-close"></i> Close</button>
+        <button type="button" class="btn btn-primary" id="removeProductBtn" data-loading-text="Loading..."> <i class="fas fa-thumbs-up"></i> Save changes</button>
       </div>
     </div><!-- /.modal-content -->
   </div><!-- /.modal-dialog -->

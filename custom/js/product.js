@@ -6,7 +6,7 @@ $(document).ready(function() {
 	// manage product data table
 
 	$(document).ready(function() {
-		$('#manageProductTable').DataTable( {
+		manageProductTable = $('#manageProductTable').DataTable( {
 			'ajax': 'php_action/fetchProduct.php',			
 			'order': []			
 		} );
@@ -34,7 +34,7 @@ $(document).ready(function() {
 		    removeTitle: 'Cancel or reset changes',
 		    elErrorContainer: '#kv-avatar-errors-1',
 		    msgErrorClass: 'alert alert-block alert-danger',
-		    defaultPreviewContent: '<img src="assests/images/photo_default.png" alt="Profile Image" style="width:100%;">',
+		    defaultPreviewContent: '<img src="assets/images/photo_default.png" alt="Profile Image" style="width:100%;">',
 		    layoutTemplates: {main2: '{preview} {remove} {browse}'},								    
 	  		allowedFileExtensions: ["jpg", "png", "gif", "JPG", "PNG", "GIF"]
 			});   
@@ -149,7 +149,7 @@ $(document).ready(function() {
 							// shows a successful message after operation
 							$('#add-product-messages').html('<div class="alert alert-success">'+
 		            '<button type="button" class="close" data-dismiss="alert">&times;</button>'+
-		            '<strong><i class="glyphicon glyphicon-ok-sign"></i></strong> '+ response.messages +
+		            '<strong><i class="fas fa-thumbs-up"></i></strong> '+ response.messages +
 		          '</div>');
 
 							// remove the mesages
@@ -414,7 +414,7 @@ function editProduct(productId = null) {
 									// shows a successful message after operation
 									$('#edit-productPhoto-messages').html('<div class="alert alert-success">'+
 				            '<button type="button" class="close" data-dismiss="alert">&times;</button>'+
-				            '<strong><i class="glyphicon glyphicon-ok-sign"></i></strong> '+ response.messages +
+				            '<strong><i class="fas fa-thumbs-up"></i></strong> '+ response.messages +
 				          '</div>');
 
 									// remove the mesages
@@ -485,7 +485,7 @@ function removeProduct(productId = null) {
 						// remove success messages
 						$(".remove-messages").html('<div class="alert alert-success">'+
 		            '<button type="button" class="close" data-dismiss="alert">&times;</button>'+
-		            '<strong><i class="glyphicon glyphicon-ok-sign"></i></strong> '+ response.messages +
+		            '<strong><i class="fas fa-thumbs-up"></i></strong> '+ response.messages +
 		          '</div>');
 
 						// remove the mesages
@@ -499,7 +499,7 @@ function removeProduct(productId = null) {
 						// remove success messages
 						$(".removeProductMessages").html('<div class="alert alert-success">'+
 		            '<button type="button" class="close" data-dismiss="alert">&times;</button>'+
-		            '<strong><i class="glyphicon glyphicon-ok-sign"></i></strong> '+ response.messages +
+		            '<strong><i class="fas fa-thumbs-up"></i></strong> '+ response.messages +
 		          '</div>');
 
 						// remove the mesages
