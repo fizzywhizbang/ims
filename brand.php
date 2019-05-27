@@ -1,4 +1,4 @@
-<?php require_once 'includes/header2.php'; ?>
+<?php require_once 'includes/header.php'; ?>
 
 
 <div class="row">
@@ -74,7 +74,7 @@
 	      </div> <!-- /modal-body -->
 	      
 	      <div class="modal-footer">
-	        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+	        <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fas fa-window-close    "></i> Close</button>
 	        
 	        <button type="submit" class="btn btn-primary" id="createBrandBtn" data-loading-text="Loading..." autocomplete="off">Save Changes</button>
 	      </div>
@@ -97,7 +97,7 @@
 	      <div class="modal-header">
 				<h4 class="modal-title"><i class="fa fa-edit"></i> Edit Brand</h4>
 	        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-	        
+	         
 	      </div>
 	      <div class="modal-body">
 
@@ -133,9 +133,9 @@
 	      </div> <!-- /modal-body -->
 	      
 	      <div class="modal-footer editBrandFooter">
-	        <button type="button" class="btn btn-default" data-dismiss="modal"> <i class="glyphicon glyphicon-remove-sign"></i> Close</button>
+	        <button type="button" class="btn btn-default" data-dismiss="modal"> <i class="fas fa-window-close    "></i> Close</button>
 	        
-	        <button type="submit" class="btn btn-success" id="editBrandBtn" data-loading-text="Loading..." autocomplete="off"> <i class="fas fa-thumbs-up    "></i> Save Changes</button>
+	        <button type="submit" class="btn btn-success" id="editBrandBtn" data-loading-text="Loading..." autocomplete="off" > <i class="fas fa-thumbs-up    "></i> Save Changes</button>
 	      </div>
 	      <!-- /modal-footer -->
      	</form>
@@ -161,8 +161,9 @@
         <p>Do you really want to remove ?</p>
       </div>
       <div class="modal-footer removeBrandFooter">
+		
         <button type="button" class="btn btn-default" data-dismiss="modal"> <i class="fas fa-window-close    "></i> Close</button>
-        <button type="button" class="btn btn-primary" id="removeBrandBtn" data-loading-text="Loading..."> <i class="fas fa-thumbs-up    "></i> Save changes</button>
+        <button type="button" class="btn btn-primary" id="removeBrandBtn" data-loading-text="Loading..."  > <i class="fas fa-thumbs-up    "></i> Save changes</button>
       </div>
     </div><!-- /.modal-content -->
   </div><!-- /.modal-dialog -->

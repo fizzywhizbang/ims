@@ -25,8 +25,8 @@ $ims_tax = $result['tax'];
 
 // echo $_SESSION['userId'];
 
-if(!$_SESSION['userId']) {
-	header('location: '.$webroot.'index.php');	
+if(!isset($_SESSION['userId'])) {
+	header('Location: index.php');	
 } 
 
 

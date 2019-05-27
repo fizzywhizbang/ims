@@ -1,5 +1,12 @@
 <?php 
 require_once 'includes/header2.php'; 
+?>
+ <script>
+  $( function() {
+    $("#orderDate").datepicker({ dateFormat: 'yy-mm-dd' });
+  } );
+	</script>
+	<?PHP
 
 if($_GET['o'] == 'add') { 
 // add order

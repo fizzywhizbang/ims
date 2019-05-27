@@ -4,7 +4,7 @@
 
 require_once 'core.php';
 
-$sql = "SELECT * FROM users";
+$sql = "SELECT * FROM ".$db_prefix."users";
 
 $result = $connect->query($sql);
 

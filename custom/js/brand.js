@@ -6,7 +6,7 @@ $(document).ready(function() {
 	
 	// manage brand table
 	$(document).ready(function() {
-		$('#manageBrandTable').DataTable( {
+	manageBrandTable = $('#manageBrandTable').DataTable( {
 			'ajax': 'php_action/fetchBrand.php',
 			columnDefs:[
 				{
@@ -17,7 +17,10 @@ $(document).ready(function() {
 			
 			'order': []			
 		} );
+
+
 	} );
+
 
 	// submit brand form function
 	$("#submitBrandForm").unbind('submit').bind('submit', function() {
@@ -67,7 +70,7 @@ $(document).ready(function() {
 					if(response.success == true) {
 						// reload the manage member table 
 						manageBrandTable.ajax.reload(null, false);						
-
+						
   	  			// reset the form text
 						$("#submitBrandForm")[0].reset();
 						// remove the error text
@@ -77,7 +80,7 @@ $(document).ready(function() {
   	  			
   	  			$('#add-brand-messages').html('<div class="alert alert-success">'+
             '<button type="button" class="close" data-dismiss="alert">&times;</button>'+
-            '<strong><i class="glyphicon glyphicon-ok-sign"></i></strong> '+ response.messages +
+            '<strong><i class="fas fa-thumbs-up"></i></strong> '+ response.messages +
           '</div>');
 
   	  			$(".alert-success").delay(500).show(10, function() {
@@ -93,6 +96,7 @@ $(document).ready(function() {
 
 		return false;
 	}); // /submit brand form function
+
 
 });
 
@@ -164,10 +168,10 @@ function editBrands(brandId = null) {
 						// success out for form 
 						$("#editBrandStatus").closest('.form-group').addClass('has-success');	  	
 					}
-
+					
 					if(brandName && brandStatus) {
 						var form = $(this);
-
+						
 						// submit btn
 						$('#editBrandBtn').button('loading');
 
@@ -192,7 +196,7 @@ function editBrands(brandId = null) {
 			  	  			
 			  	  			$('#edit-brand-messages').html('<div class="alert alert-success">'+
 			            '<button type="button" class="close" data-dismiss="alert">&times;</button>'+
-			            '<strong><i class="glyphicon glyphicon-ok-sign"></i></strong> '+ response.messages +
+			            '<strong><i class="fas fas-thumbs-up"></i></strong> '+ response.messages +
 			          '</div>');
 
 			  	  			$(".alert-success").delay(500).show(10, function() {
@@ -231,7 +235,7 @@ function removeBrands(brandId = null) {
 				// click on remove button to remove the brand
 				$("#removeBrandBtn").unbind('click').bind('click', function() {
 					// button loading
-					$("#removeBrandBtn").button('loading');
+					//$("#removeBrandBtn").button('loading');
 
 					$.ajax({
 						url: 'php_action/removeBrand.php',
@@ -240,8 +244,9 @@ function removeBrands(brandId = null) {
 						dataType: 'json',
 						success:function(response) {
 							console.log(response);
+							
 							// button loading
-							$("#removeBrandBtn").button('reset');
+							//$("#removeBrandBtn").button('reset');
 							if(response.success == true) {
 
 								// hide the remove modal 
@@ -249,6 +254,7 @@ function removeBrands(brandId = null) {
 
 								// reload the brand table 
 								manageBrandTable.ajax.reload(null, false);
+								
 								
 								$('.remove-messages').html('<div class="alert alert-success">'+
 			            '<button type="button" class="close" data-dismiss="alert">&times;</button>'+
@@ -258,6 +264,8 @@ function removeBrands(brandId = null) {
 			  	  			$(".alert-success").delay(500).show(10, function() {
 										$(this).delay(3000).hide(10, function() {
 											$(this).remove();
+											
+											//location.reload();
 										});
 									}); // /.alert
 							} else {

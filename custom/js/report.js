@@ -37,6 +37,7 @@ $(document).ready(function() {
 				data: form.serialize(),
 				dataType: 'text',
 				success:function(response) {
+					alert(response);
 					var mywindow = window.open('', 'Stock Management System', 'height=400,width=600');
 	        mywindow.document.write('<html><head><title>Order Report Slip</title>');        
 	        mywindow.document.write('</head><body>');
