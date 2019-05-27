@@ -7,6 +7,11 @@ Report management
 User wise sell report
 #Requirement
 Need to change
-core.php, logout.php, index.php
-header('location: http://localhost/<foldername>/index.php');	
+$webroot = "ims/";
+$db_prefix = "ims_";
+$localhost = "";
+$username = "";
+$password = "";
+$dbname = "";
+in php_action/db_config.php
 
