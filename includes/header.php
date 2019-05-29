@@ -6,13 +6,13 @@
 </head>
 <body>
 
-<nav class="navbar navbar-light navbar-expand-lg  bg-light">
-  <a class="navbar-brand mb-0 h1" href="#"><?PHP echo $ims_companyname;?></a>
+<nav class="navbar navbar-light navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand" href="#"><?PHP echo $ims_companyname;?></a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
   <div class="collapse navbar-collapse" id="navbarNav">
-    <ul class="navbar-nav ml-auto">
+    <ul class="navbar-nav">
     <li class="nav-item" id="navDashboard"><a class="nav-link" href="index.php"><i class="fas fa-list-alt    "></i>  Dashboard</a></li>        
         <?php if(isset($_SESSION['userId']) && $_SESSION['userId']==1) { ?>
         <li class="nav-item" id="navBrand">
@@ -48,7 +48,7 @@
           <ul class="dropdown-menu">    
 			<?php if(isset($_SESSION['userId']) && $_SESSION['userId']==1) { ?>
             <li class="dropdown-item" id="topNavSetting"><a class="dropdown-item" href="setting.php"> <i class="fas fa-wrench"></i> Setting</a></li>
-            <li class="dropdown-item" id="topNavUser"><a href="user.php"> <i class="fas fa-wrench"></i> Add User</a></li>
+            <li class="dropdown-item" id="topNavUser"><a class="dropdown-item" href="user.php"> <i class="fas fa-wrench"></i> Add User</a></li>
 <?php } ?>              
             <li class="dropdown-item" id="topNavLogout"><a class="dropdown-item" href="logout.php"> <i class="fas fa-lock    "></i> Logout</a></li>            
           </ul>
