@@ -40,9 +40,7 @@
 		<?php  if(isset($_SESSION['userId']) && $_SESSION['userId']==1) { ?>
         <li id="navReport"><a class="nav-link" href="report.php"> <i class="fas fa-check    "></i> Report </a></li>
     <?php } ?>   
-    <?php if(isset($_SESSION['userId']) && $_SESSION['userId']==1) { ?>
-        <li class="nav-item" id="navSystem"><a class="nav-link" href="system.php"><i class="fas fa-cog"></i> System Settings </a></li> 
-		<?php } ?>
+    
         <li class="nav-item dropdown" id="navSetting">
           <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> <i class="fa fa-cogs" aria-hidden="true"></i> User<span class="caret"></span></a>
           <ul class="dropdown-menu">    
@@ -50,7 +48,10 @@
             <li class="dropdown-item" id="topNavSetting"><a class="dropdown-item" href="setting.php"> <i class="fas fa-wrench"></i> Setting</a></li>
             <li class="dropdown-item" id="topNavUser"><a class="dropdown-item" href="user.php"> <i class="fas fa-wrench"></i> Add User</a></li>
 <?php } ?>              
-            <li class="dropdown-item" id="topNavLogout"><a class="dropdown-item" href="logout.php"> <i class="fas fa-lock    "></i> Logout</a></li>            
+            <li class="dropdown-item" id="topNavLogout"><a class="dropdown-item" href="logout.php"> <i class="fas fa-lock    "></i> Logout</a></li>   
+            <?php if(isset($_SESSION['userId']) && $_SESSION['userId']==1) { ?>
+        <li class="nav-item" id="navSystem"><a class="nav-link" href="system.php"><i class="fas fa-cog"></i> System Settings </a></li> 
+		<?php } ?>         
           </ul>
         </li>        
     </ul>
