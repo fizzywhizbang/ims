@@ -17,7 +17,7 @@ if($result->num_rows > 0) {
  while($row = $result->fetch_array()) {
  	$orderId = $row[0];
 
- 	$countOrderItemSql = "SELECT count(*) FROM order_item WHERE order_id = $orderId";
+ 	$countOrderItemSql = "SELECT count(*) FROM ".$db_prefix."order_item WHERE order_id = $orderId";
  	$itemCountResult = $connect->query($countOrderItemSql);
  	$itemCountRow = $itemCountResult->fetch_row();
 
