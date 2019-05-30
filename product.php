@@ -1,4 +1,4 @@
-<?php require_once 'includes/header2.php'; ?>
+<?php require_once 'includes/header.php'; ?>
 
 <div class="row">
 	<div class="col-md-12">
