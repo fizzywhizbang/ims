@@ -35,8 +35,8 @@ $connect->close();
 </style>
 
 <!-- fullCalendar 2.2.5-->
-    <link rel="stylesheet" href="assests/plugins/fullcalendar/fullcalendar.min.css">
-    <link rel="stylesheet" href="assests/plugins/fullcalendar/fullcalendar.print.css" media="print">
+    <link rel="stylesheet" href="assets/plugins/fullcalendar/fullcalendar.min.css">
+    <link rel="stylesheet" href="assets/plugins/fullcalendar/fullcalendar.print.css" media="print">
 
 <div class="row">
 	<?php  if(isset($_SESSION['userId']) && $_SESSION['userId']==1) { ?>
@@ -154,8 +154,8 @@ $connect->close();
 </div> <!--/row-->
 
 <!-- fullCalendar 2.2.5 -->
-<script src="assests/plugins/moment/moment.min.js"></script>
-<script src="assests/plugins/fullcalendar/fullcalendar.min.js"></script>
+<script src="assets/plugins/moment/moment.min.js"></script>
+<script src="assets/plugins/fullcalendar/fullcalendar.min.js"></script>
 
 
 <script type="text/javascript">

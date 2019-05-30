@@ -1,5 +1,5 @@
 <?php 	
-
+date_default_timezone_set("America/Chicago");
 $webroot = "ims/";
 $db_prefix = "ims_";
 $localhost = "localhost";

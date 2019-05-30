@@ -294,8 +294,8 @@ if($_GET['o'] == 'add') {
 
   			<?php $orderId = $_GET['i'];
 
-  			$sql = "SELECT orders.order_id, orders.order_date, orders.client_name, orders.client_contact, orders.sub_total, orders.vat, orders.total_amount, orders.discount, orders.grand_total, orders.paid, orders.due, orders.payment_type, orders.payment_status,orders.payment_place,orders.gstn FROM orders 	
-					WHERE orders.order_id = {$orderId}";
+  			$sql = "SELECT ".$db_prefix."orders.order_id, ".$db_prefix."orders.order_date, ".$db_prefix."orders.client_name, ".$db_prefix."orders.client_contact, ".$db_prefix."orders.sub_total, ".$db_prefix."orders.vat, ".$db_prefix."orders.total_amount, ".$db_prefix."orders.discount, ".$db_prefix."orders.grand_total, ".$db_prefix."orders.paid, ".$db_prefix."orders.due, ".$db_prefix."orders.payment_type, ".$db_prefix."orders.payment_status,".$db_prefix."orders.payment_place,".$db_prefix."orders.gstn FROM ".$db_prefix."orders 	
+					WHERE ".$db_prefix."orders.order_id = {$orderId}";
 
 				$result = $connect->query($sql);
 				$data = $result->fetch_row();
@@ -334,7 +334,7 @@ if($_GET['o'] == 'add') {
 			  	<tbody>
 			  		<?php
 
-			  		$orderItemSql = "SELECT order_item.order_item_id, order_item.order_id, order_item.product_id, order_item.quantity, order_item.rate, order_item.total FROM order_item WHERE order_item.order_id = {$orderId}";
+			  		$orderItemSql = "SELECT ".$db_prefix."order_item.order_item_id, ".$db_prefix."order_item.order_id, ".$db_prefix."order_item.product_id, ".$db_prefix."order_item.quantity, ".$db_prefix."order_item.rate, ".$db_prefix."order_item.total FROM ".$db_prefix."order_item WHERE ".$db_prefix."order_item.order_id = {$orderId}";
 						$orderItemResult = $connect->query($orderItemSql);
 						// $orderItemData = $orderItemResult->fetch_all();						
 						
@@ -351,7 +351,7 @@ if($_GET['o'] == 'add') {
 			  					<select class="form-control" name="productName[]" id="productName<?php echo $x; ?>" onchange="getProductData(<?php echo $x; ?>)" >
 			  						<option value="">~~SELECT~~</option>
 			  						<?php
-			  							$productSql = "SELECT * FROM product WHERE active = 1 AND status = 1 AND quantity != 0";
+			  							$productSql = "SELECT * FROM ".$db_prefix."product WHERE active = 1 AND status = 1 AND quantity != 0";
 			  							$productData = $connect->query($productSql);
 
 			  							while($row = $productData->fetch_array()) {									 		
@@ -376,7 +376,7 @@ if($_GET['o'] == 'add') {
 							<td style="padding-left:20px;">
 			  					<div class="form-group">
 									<?php
-			  							$productSql = "SELECT * FROM product WHERE active = 1 AND status = 1 AND quantity != 0";
+			  							$productSql = "SELECT * FROM ".$db_prefix."product WHERE active = 1 AND status = 1 AND quantity != 0";
 			  							$productData = $connect->query($productSql);
 
 			  							while($row = $productData->fetch_array()) {									 		
@@ -406,7 +406,7 @@ if($_GET['o'] == 'add') {
 			  				</td>
 			  				<td>
 
-			  					<button class="btn btn-default removeProductRowBtn" type="button" id="removeProductRowBtn" onclick="removeProductRow(<?php echo $x; ?>)"><i class="glyphicon glyphicon-trash"></i></button>
+			  					<button class="btn btn-default removeProductRowBtn" type="button" id="removeProductRowBtn" onclick="removeProductRow(<?php echo $x; ?>)"><i class="fas fa-trash"></i></button>
 			  				</td>
 			  			</tr>
 		  			<?php

@@ -38,6 +38,7 @@ $(document).ready(function() {
 			}
 			} );
 	});
+	
 
 	var divRequest = $(".div-request").text();
 
