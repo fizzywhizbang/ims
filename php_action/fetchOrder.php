@@ -37,15 +37,15 @@ if($result->num_rows > 0) {
 	    Action <span class="caret"></span>
 	  </button>
 	  <ul class="dropdown-menu">
-	    <li><a href="orders.php?o=editOrd&i='.$orderId.'" id="editOrderModalBtn"> <i class="glyphicon glyphicon-edit"></i> Edit</a></li>
+	    <li class="dropdown-item"><a class="dropdown-item" href="orders.php?o=editOrd&i='.$orderId.'" id="editOrderModalBtn"> <i class="fas fa-edit"></i> Edit</a></li>
 	    
-	    <li><a type="button" data-toggle="modal" id="paymentOrderModalBtn" data-target="#paymentOrderModal" onclick="paymentOrder('.$orderId.')"> <i class="glyphicon glyphicon-save"></i> Payment</a></li>
+	    <li class="dropdown-item"><a class="dropdown-item" data-toggle="modal" id="paymentOrderModalBtn" data-target="#paymentOrderModal" onclick="paymentOrder('.$orderId.')"> <i class="fas fa-save"></i> Payment</a></li>
 
-		<li><a type="button" onclick="printOrder('.$orderId.')"> <i class="glyphicon glyphicon-print"></i> Print </a></li>
+		<li class="dropdown-item"><a class="dropdown-item" onclick="printOrder('.$orderId.')"> <i class="fas fa-print"></i> Print </a></li>
 
-		<!-- <li><a type="button" onclick="printPDF('.$orderId.')"> <i class="glyphicon  glyphicon-save-file"></i> Download PDF </a></li>-->
+		<!-- <li><a class="dropdown-item" onclick="printPDF('.$orderId.')"> <i class="fas fa-save-file"></i> Download PDF </a></li>-->
 	    
-	    <li><a type="button" data-toggle="modal" data-target="#removeOrderModal" id="removeOrderModalBtn" onclick="removeOrder('.$orderId.')"> <i class="glyphicon glyphicon-trash"></i> Remove</a></li>       
+	    <li class="dropdown-item"><a class="dropdown-item" data-toggle="modal" data-target="#removeOrderModal" id="removeOrderModalBtn" onclick="removeOrder('.$orderId.')"> <i class="fas fa-trash"></i> Remove</a></li>       
 	  </ul>
 	</div>';		
 
