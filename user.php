@@ -44,8 +44,9 @@
 
     	<form class="form-horizontal" id="submitUserForm" action="php_action/createUser.php" method="POST" enctype="multipart/form-data">
 	      <div class="modal-header">
+				<h4 class="modal-title"><i class="fa fa-plus"></i> Add User</h4>
 	        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-	        <h4 class="modal-title"><i class="fa fa-plus"></i> Add User</h4>
+	        
 	      </div>
 
 	      <div class="modal-body" style="max-height:450px; overflow:auto;">
@@ -81,9 +82,9 @@
 	      </div> <!-- /modal-body -->
 	      
 	      <div class="modal-footer">
-	        <button type="button" class="btn btn-default" data-dismiss="modal"> <i class="fas fa-remove-sign"></i> Close</button>
+	        <button type="button" class="btn btn-default" data-dismiss="modal"> <i class="fas fa-window-close    "></i> Close</button>
 	        
-	        <button type="submit" class="btn btn-primary" id="createUserBtn" data-loading-text="Loading..." autocomplete="off"> <i class="glyphicon glyphicon-ok-sign"></i> Save Changes</button>
+	        <button type="submit" class="btn btn-primary" id="createUserBtn" data-loading-text="Loading..." autocomplete="off"> <i class="fas fa-thumbs-up"></i> Save Changes</button>
 	      </div> <!-- /modal-footer -->	      
      	</form> <!-- /.form -->	     
     </div> <!-- /modal-content -->    
@@ -98,8 +99,9 @@
     <div class="modal-content">
     	    	
 	      <div class="modal-header">
+				<h4 class="modal-title"><i class="fa fa-edit"></i> Edit User</h4>
 	        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-	        <h4 class="modal-title"><i class="fa fa-edit"></i> Edit User</h4>
+	        
 	      </div>
 	      <div class="modal-body" style="max-height:450px; overflow:auto;">
 
@@ -147,9 +149,9 @@
          	        
 
 			        <div class="modal-footer editUserFooter">
-				        <button type="button" class="btn btn-default" data-dismiss="modal"> <i class="glyphicon glyphicon-remove-sign"></i> Close</button>
+				        <button type="button" class="btn btn-default" data-dismiss="modal"> <i class="fas fa-window-close    "></i> Close</button>
 				        
-				        <button type="submit" class="btn btn-success" id="editProductBtn" data-loading-text="Loading..."> <i class="glyphicon glyphicon-ok-sign"></i> Save Changes</button>
+				        <button type="submit" class="btn btn-success" id="editProductBtn" data-loading-text="Loading..."> <i class="fas fa-tuhumbs-up"></i> Save Changes</button>
 				      </div> <!-- /modal-footer -->				     
 			        </form> <!-- /.form -->				     	
 				    </div>    
@@ -173,8 +175,9 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
+			<h4 class="modal-title"><i class="fas fa-trash"></i> Remove User</h4>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title"><i class="glyphicon glyphicon-trash"></i> Remove User</h4>
+        
       </div>
       <div class="modal-body">
 
@@ -183,8 +186,8 @@
         <p>Do you really want to remove ?</p>
       </div>
       <div class="modal-footer removeProductFooter">
-        <button type="button" class="btn btn-default" data-dismiss="modal"> <i class="glyphicon glyphicon-remove-sign"></i> Close</button>
-        <button type="button" class="btn btn-primary" id="removeProductBtn" data-loading-text="Loading..."> <i class="glyphicon glyphicon-ok-sign"></i> Save changes</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fas fa-window-close    "></i>  Close</button>
+        <button type="button" class="btn btn-primary" id="removeProductBtn" data-loading-text="Loading..."> <i class="fas fa-thumbs-up"></i> Save changes</button>
       </div>
     </div><!-- /.modal-content -->
   </div><!-- /.modal-dialog -->
