@@ -5,20 +5,20 @@
 	<div class="col-md-12">
 
 		<ol class="breadcrumb">
-		  <li><a href="dashboard.php">Home</a></li>		  
-		  <li class="active">User</li>
+		  <li class="breadcrumb-item"><a href="dashboard.php">Home</a></li>		  
+		  <li class="breadcrumb-item active">User</li>
 		</ol>
 
-		<div class="panel panel-default">
+		<div class="card panel-default">
 			<div class="panel-heading">
-				<div class="page-heading"> <i class="glyphicon glyphicon-edit"></i> Manage User</div>
+				<div class="page-heading"> <i class="fas fa-edit"></i> Manage User</div>
 			</div> <!-- /panel-heading -->
 			<div class="panel-body">
 
 				<div class="remove-messages"></div>
 
 				<div class="div-action pull pull-right" style="padding-bottom:20px;">
-					<button class="btn btn-default button1" data-toggle="modal" id="addUserModalBtn" data-target="#addUserModal"> <i class="glyphicon glyphicon-plus-sign"></i> Add User </button>
+					<button class="btn btn-default button1" data-toggle="modal" id="addUserModalBtn" data-target="#addUserModal"> <i class="fas fa-plus-sign"></i> Add User </button>
 				</div> <!-- /div-action -->				
 				
 				<table class="table" id="manageUserTable">
@@ -81,7 +81,7 @@
 	      </div> <!-- /modal-body -->
 	      
 	      <div class="modal-footer">
-	        <button type="button" class="btn btn-default" data-dismiss="modal"> <i class="glyphicon glyphicon-remove-sign"></i> Close</button>
+	        <button type="button" class="btn btn-default" data-dismiss="modal"> <i class="fas fa-remove-sign"></i> Close</button>
 	        
 	        <button type="submit" class="btn btn-primary" id="createUserBtn" data-loading-text="Loading..." autocomplete="off"> <i class="glyphicon glyphicon-ok-sign"></i> Save Changes</button>
 	      </div> <!-- /modal-footer -->	      

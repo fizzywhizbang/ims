@@ -36,7 +36,9 @@
             <li class="dropdown-item" id="topNavManageOrder"><a class="dropdown-item" href="orders.php?o=manord"> <i class="glyphicon glyphicon-edit"></i> Manage Orders</a></li>            
           </ul>
         </li> 
-		
+  <?php  if(isset($_SESSION['userId']) && $_SESSION['userId']==1) { ?>
+        <li id="navReport"><a class="nav-link" href="addressbook.php"> <i class="fas fa-address-book    "></i> Addressbook </a></li>
+    <?php } ?>   
 		<?php  if(isset($_SESSION['userId']) && $_SESSION['userId']==1) { ?>
         <li id="navReport"><a class="nav-link" href="report.php"> <i class="fas fa-check    "></i> Report </a></li>
     <?php } ?>   
