@@ -65,6 +65,10 @@ div.kv-avatar div.file-input div.file-preview {
   color: #245580;
 }
 
+.text-red {
+  color: #ff0000;
+}
+
 .header-blue {
   background-color: #245580!important;
   color: #fff!important;

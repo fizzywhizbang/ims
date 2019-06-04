@@ -12,7 +12,7 @@ $countOrder = $orderQuery->num_rows;
 
 $totalRevenue = "";
 while ($orderResult = $orderQuery->fetch_assoc()) {
-	$totalRevenue += $orderResult['paid'];
+	@$totalRevenue += $orderResult['paid']; //added ampersand to quiet the error when there is no total revenue
 }
 
 $lowStockSql = "SELECT * FROM ".$db_prefix."product WHERE quantity <= 3 AND status = 1";
@@ -23,7 +23,7 @@ $userwisesql = "SELECT ".$db_prefix."users.username , SUM(".$db_prefix."orders.g
 $userwiseQuery = $connect->query($userwisesql);
 $userwieseOrder = $userwiseQuery->num_rows;
 
-$connect->close();
+
 
 ?>
 
@@ -107,7 +107,9 @@ $connect->close();
 		    	echo $totalRevenue;
 		    	} else {
 		    		echo '0';
-		    		} ?></h1>
+						} 
+						
+						?></h1>
 		  </div>
 
 		  <div class="cardContainer">
@@ -184,4 +186,8 @@ $connect->close();
     });
 </script>
 
-<?php require_once 'includes/footer.php'; ?>
+<?php 
+
+require_once 'includes/footer.php';
+
+$connect->close();?>

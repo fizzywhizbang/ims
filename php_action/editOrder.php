@@ -4,80 +4,99 @@ require_once 'core.php';
 
 $valid['success'] = array('success' => false, 'messages' => array());
 
-if($_POST) {	
+if($_POST) {
+	//update static items from the invoice
 	$orderId = $_POST['orderId'];
-
-	$orderDate 						= date('Y-m-d', strtotime($_POST['orderDate']));
-  $clientName 					= $_POST['clientName'];
-  $clientContact 				= $_POST['clientContact'];
-  $subTotalValue 				= $_POST['subTotalValue'];
-  $vatValue 						=	$_POST['vatValue'];
-  $totalAmountValue     = $_POST['totalAmountValue'];
-  $discount 						= $_POST['discount'];
-  $grandTotalValue 			= $_POST['grandTotalValue'];
-  $paid 								= $_POST['paid'];
-  $dueValue 						= $_POST['dueValue'];
-  $paymentType 					= $_POST['paymentType'];
-  $paymentStatus 				= $_POST['paymentStatus'];
-  $paymentPlace 				= $_POST['paymentPlace'];
-  $gstn 				= $_POST['gstn'];
-	$userid 				= $_SESSION['userId'];
+	$orderDate = date('Y-m-d', strtotime($_POST['orderDate']));
+	$clientName = $_POST['clientName'];
+	$clientContact = $_POST['clientContact'];
+	$subTotalValue = $_POST['subTotalValue'];
+	$vatValue =	$_POST['vatValue'];
+	$totalAmountValue = $_POST['totalAmountValue'];
+	$discount = $_POST['discount'];
+	$grandTotalValue = $_POST['grandTotalValue'];
+	$paid = $_POST['paid'];
+	$dueValue = $_POST['dueValue'];
+	$paymentType = $_POST['paymentType'];
+	$paymentStatus = $_POST['paymentStatus'];
+	$paymentPlace = $_POST['paymentPlace'];
+	$gstn = $_POST['gstn'];
+	$userid = $_SESSION['userId'];
 				
+	//update base order data
 	$sql = "UPDATE ".$db_prefix."orders SET order_date = '$orderDate', client_name = '$clientName', client_contact = '$clientContact', sub_total = '$subTotalValue', vat = '$vatValue', total_amount = '$totalAmountValue', discount = '$discount', grand_total = '$grandTotalValue', paid = '$paid', due = '$dueValue', payment_type = '$paymentType', payment_status = '$paymentStatus', order_status = 1 ,user_id = '$userid',payment_place = '$paymentPlace' , gstn = '$gstn' WHERE order_id = {$orderId}";	
 	$connect->query($sql);
+	/// end update static
+
+	//to be removed
+	/*
+	plan is to select the product id count and update table based on diff
+	followed by return or remove from product availability based on returning a negative or positive integer
+	1) loop through product id(s)
+	2) get product quantity available
+	3) check if order_item_id == new
+		4) if not new then
+			4.1) query order_item for quantity of item
+			4.2)	return to inventory if qty decreased
+			4.3)	remove from inventory if qty increased
+		5) if new
+			5.1) add to order_item
+			5.2) then remove quantity from product availability
 	
-	$readyToUpdateOrderItem = false;
-	// add the quantity from the order item to product table
-	for($x = 0; $x < count($_POST['productName']); $x++) {		
-		//  product table
-		$updateProductQuantitySql = "SELECT ".$db_prefix."product.quantity FROM product WHERE product.product_id = ".$_POST['productName'][$x]."";
-		$updateProductQuantityData = $connect->query($updateProductQuantitySql);			
+		***need something for orphaned order items
+	*/
+
+
+	//1)
+	for($i = 0; $i < count($_POST['productName']); $i++) {
+		//2)
+		$quantity_available=getProdQty($_POST['productName'][$i]);
+		if($_POST['order_item_id'][$i] != "new"){ //3
+			//4.1) query order_item for quantity of item
+			$order_item_sql="select quantity from " . $db_prefix ."order_item where order_item_id=" . $_POST["order_item_id"][$i];
+			$order_item_query = $connect->query($order_item_sql);
+			$order_item_data = $order_item_query->fetch_row();
+			$order_item_quantity=$order_item_data[0];
+
+			$total = $_POST['quantity'][$i] * $_POST['rateValue'][$i];
+
+			if($order_item_quantity==$_POST['quantity'][$i]){
+				// do nothing as there is no change
+			} elseif ($order_item_quantity > $_POST['quantity'][$i]){ //if the quantity is decreased remove from
+				//4.2) we removed from order
+				$difference = $order_item_quantity - $_POST['quantity'][$i];
+				// add the difference back to inventory
+				$newval = $quantity_available + $difference;
+				$updateInventory="update " . $db_prefix . "product set quantity=" . $newval . " where product_id=" . $_POST['productName'][$i];
+				$connect->query($updateInventory);
+				//calc new total
+				$updateOrderItems="update " . $db_prefix . "order_item set quantity='" . $_POST['quantity'][$i] . "', total=".$total." where order_item_id=" . $_POST["order_item_id"][$i];
+				$connect->query($updateOrderItems);
+			} else { //
+				//4.3) we added to order
+				$difference =$_POST['quantity'][$i] - $order_item_quantity;
+				// subtract the difference back from inventory
+				$newval = $quantity_available - $difference;
+				$updateInventory="update " . $db_prefix . "product set quantity=" . $newval . " where product_id=" . $_POST['productName'][$i];
+				$connect->query($updateInventory);
+
+				$updateOrderItems="update " . $db_prefix . "order_item set quantity='" . $_POST['quantity'][$i] . "', total=".$total." where order_item_id=" . $_POST["order_item_id"][$i];
+				$connect->query($updateOrderItems);
+			}
 			
-		while ($updateProductQuantityResult = $updateProductQuantityData->fetch_row()) {
-			// order item table add product quantity
-			$orderItemTableSql = "SELECT ".$db_prefix."order_item.quantity FROM order_item WHERE order_item.order_id = {$orderId}";
-			$orderItemResult = $connect->query($orderItemTableSql);
-			$orderItemData = $orderItemResult->fetch_row();
 
-			$editQuantity = $updateProductQuantityResult[0] + $orderItemData[0];							
-
-			$updateQuantitySql = "UPDATE ".$db_prefix."product SET quantity = $editQuantity WHERE product_id = ".$_POST['productName'][$x]."";
-			$connect->query($updateQuantitySql);		
-		} // while	
-		
-		if(count($_POST['productName']) == count($_POST['productName'])) {
-			$readyToUpdateOrderItem = true;			
+		} else { //5
+			//add new items here
+			//5.1) add to order_item
+			$insertQuery="insert into " . $db_prefix . "order_item (order_id,product_id,quantity,rate,total,order_item_status) values (".$orderId.",'".$_POST["productName"][$i]."','".$_POST["quantity"][$i]."','".$_POST["rateValue"][$i]."',".$total.",'1')";
+			$connect->query($insertQuery);
+			//5.2) then remove quantity from product availability
+			$newval = $quantity_available - $_POST['quantity'][$i];
+			$updateInventory="update " . $db_prefix . "product set quantity=" . $newval . " where product_id=" . $_POST['productName'][$i];
+			$connect->query($updateInventory);
 		}
-	} // /for quantity
 
-	// remove the order item data from order item table
-	for($x = 0; $x < count($_POST['productName']); $x++) {			
-		$removeOrderSql = "DELETE FROM ".$db_prefix."order_item WHERE order_id = {$orderId}";
-		$connect->query($removeOrderSql);	
-	} // /for quantity
-
-	if($readyToUpdateOrderItem) {
-			// insert the order item data 
-		for($x = 0; $x < count($_POST['productName']); $x++) {			
-			$updateProductQuantitySql = "SELECT ".$db_prefix."product.quantity FROM ".$db_prefix."product WHERE ".$db_prefix."product.product_id = ".$_POST['productName'][$x]."";
-			$updateProductQuantityData = $connect->query($updateProductQuantitySql);
-			
-			while ($updateProductQuantityResult = $updateProductQuantityData->fetch_row()) {
-				$updateQuantity[$x] = $updateProductQuantityResult[0] - $_POST['quantity'][$x];							
-					// update product table
-					$updateProductTable = "UPDATE ".$db_prefix."product SET quantity = '".$updateQuantity[$x]."' WHERE product_id = ".$_POST['productName'][$x]."";
-					$connect->query($updateProductTable);
-
-					// add into order_item
-				$orderItemSql = "INSERT INTO ".$db_prefix."order_item (order_id, product_id, quantity, rate, total, order_item_status) 
-				VALUES ({$orderId}, '".$_POST['productName'][$x]."', '".$_POST['quantity'][$x]."', '".$_POST['rateValue'][$x]."', '".$_POST['totalValue'][$x]."', 1)";
-
-				$connect->query($orderItemSql);		
-			} // while	
-		} // /for quantity
-	}
-
-	
+	}	
 
 	$valid['success'] = true;
 	$valid['messages'] = "Successfully Updated";		

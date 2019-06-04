@@ -353,15 +353,21 @@ $(document).ready(function() {
 								// create order button
 								$(".success-messages").html('<div class="alert alert-success">'+
 	            	'<button type="button" class="close" data-dismiss="alert">&times;</button>'+
-	            	'<strong><i class="glyphicon glyphicon-ok-sign"></i></strong> '+ response.messages +	            		            		            	
-	   		       '</div>');
+	            	'<strong><i class="fas fa-thumbs-up"></i></strong> '+ response.messages +	            		            		            	
+	   		       '<br>Page will refresh automatically</div>');
 								
 							$("html, body, div.panel, div.pane-body").animate({scrollTop: '0px'}, 100);
-
-							// disabled te modal footer button
+							
+								// disabled te modal footer button
 							$(".editButtonFooter").addClass('div-hide');
 							// remove the product row
 							$(".removeProductRowBtn").addClass('div-hide');
+
+								$(this).delay(3000).hide(10, function() {
+									location.reload();
+								});
+							
+							
 								
 							} else {
 								alert(response.messages);								
@@ -443,7 +449,7 @@ function addRow() {
 			var tr = '<tr id="row'+count+'" class="'+arrayNumber+'">'+			  				
 				'<td>'+
 					'<div class="form-group">'+
-
+						'<input type="hidden" name="order_item_id[]" value="new">' +
 					'<select class="form-control" name="productName[]" id="productName'+count+'" onchange="getProductData('+count+')" >'+
 						'<option value="">~~SELECT~~</option>';
 						// console.log(response);
@@ -489,8 +495,12 @@ function addRow() {
 
 function removeProductRow(row = null) {
 	if(row) {
-		$("#row"+row).remove();
-
+		//$("#row"+row).hide();
+		//set quantity to 0
+		document.getElementById("quantity"+row).value="0";
+		document.getElementById("order_item_status"+row).value="0";
+		document.getElementById("total"+row).value="0";
+		document.getElementById("totalValue"+row).value="0";
 
 		subAmount();
 	} else {
@@ -576,6 +586,7 @@ function getTotal(row = null) {
 	if(row) {
 		var total = Number($("#rate"+row).val()) * Number($("#quantity"+row).val());
 		total = total.toFixed(2);
+		
 		$("#total"+row).val(total);
 		$("#totalValue"+row).val(total);
 		

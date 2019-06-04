@@ -21,15 +21,19 @@ if($_GET['o'] == 'add') {
 ?>
 
 <ol class="breadcrumb">
-  <li class="breadcrumb-item"><a href="dashboard.php">Home</a></li>
-  <li class="breadcrumb-item">Order</li>
-  <li class="active breadcrumb-item">
+	<li class="breadcrumb-item"><a href="dashboard.php">Home</a></li>
+	<?PHP if($_GET['o'] == 'editOrd') {?>
+		<li class="breadcrumb-item"><a href="orders.php?o=manord">Manage Orders</a></li>
+		<?PHP }?>
+  
   	<?php if($_GET['o'] == 'add') { ?>
-  		Add Order
+			<li class="active breadcrumb-item">Add Order</li>
 		<?php } else if($_GET['o'] == 'manord') { ?>
-			Manage Order
-		<?php } // /else manage order ?>
-  </li>
+			<li class="active breadcrumb-item">Manage Orders</li>
+		<?php } ?>
+	<?PHP if($_GET['o'] == 'editOrd' && $_GET['i']>=1) {?>
+		<li class="breadcrumb-item active ">Order ID: <?PHP echo $_GET["i"];?></li>
+		<?PHP }?>
 </ol>
 
 
@@ -73,7 +77,7 @@ if($_GET['o'] == 'add') {
 			  <div class="row">
 			    <label for="orderDate" class="col-sm-2 control-label">Order Date</label>
 			    <div class="col-sm-10">
-			      <input type="text" class="form-control" id="orderDate" value="<?PHP echo date("Y-d-m");?>" name="orderDate" autocomplete="off" />
+			      <input type="text" class="form-control" id="orderDate" value="<?PHP echo date("Y-m-d");?>" name="orderDate" autocomplete="off" />
 			    </div>
 			  </div> <!--/form-group-->
 			  <div class="row">
@@ -163,7 +167,7 @@ if($_GET['o'] == 'add') {
 								<option value="3">Credit Card</option>
 				      </select>
 				    </div>
-				    <label for="subTotal" class="col-sm-3 control-label">Sub Amount</label>
+				    <label for="subTotal" class="col-sm-3 control-label">Subtotal</label>
 				    <div class="col-sm-3">
 				      <input type="text" class="form-control" id="subTotal" name="subTotal" disabled="true" />
 				      <input type="hidden" class="form-control" id="subTotalValue" name="subTotalValue" />
@@ -179,12 +183,14 @@ if($_GET['o'] == 'add') {
 				      	<option value="2">Advance Payment</option>
 				      	<option value="3">No Payment</option>
 				      </select>
-				    </div>
-				    <label for="totalAmount" class="col-sm-3 control-label">Total Amount</label>
+						</div>
+						
+						<label for="totalAmount" class="col-sm-3 control-label">Total <small><i>w/tax</i></small></label>
 				    <div class="col-sm-3">
 				      <input type="text" class="form-control" id="totalAmount" name="totalAmount" disabled="true"/>
 				      <input type="hidden" class="form-control" id="totalAmountValue" name="totalAmountValue" />
 				    </div>
+				    
 				  </div> <!--/form-group-->			  
 				  <div class="row">
 					<label for="clientContact" class="col-sm-3 control-label">Payment Place</label>
@@ -194,11 +200,12 @@ if($_GET['o'] == 'add') {
 				      	<option value="1">Local</option>
 				      	<option value="2">Out of state</option>
 				      </select>
-				    </div>
-				    <label for="discount" class="col-sm-3 control-label">Discount</label>
+						</div>
+						<label for="discount" class="col-sm-3 control-label">Discount<small class="text-red"><i> dollar amount</i></small></label>
 				    <div class="col-sm-3">
 				      <input type="text" class="form-control" id="discount" name="discount" onkeyup="discountFunc()" autocomplete="off" />
 				    </div>
+				    
 				  </div> <!--/form-group-->	
 				  <div class="row">
 					<label for="blank" class="col-sm-3 control-label"></label>
@@ -213,13 +220,14 @@ if($_GET['o'] == 'add') {
 				  <div class="row">
 					<label for="blank" class="col-sm-3 control-label"></label>
 				    <div class="col-sm-3">	      
-				    </div>
-				    <label for="vat" class="col-sm-3 control-label gst">Tax <?PHP echo $ims_tax;?></label>
+						</div>
+						<label for="vat" class="col-sm-3 control-label gst">Tax <?PHP echo $ims_tax;?></label>
 				    <div class="col-sm-3">
 				      <input type="text" class="form-control" id="vat" name="gstn" value="<?PHP echo $ims_tax;?>" readonly="true" />
 							<input type="hidden" class="form-control" id="vatValue" name="vatValue" />
 							<input type="hidden" class="form-control" id="taxrate" value="<?PHP echo $ims_tax;?>">
 				    </div>
+				    
 				  </div>	  		  
 			  </div> <!--/col-md-6-->
 
@@ -286,6 +294,7 @@ if($_GET['o'] == 'add') {
 		// /else manage order
 		} else if($_GET['o'] == 'editOrd') {
 			// get order
+			
 			?>
 			
 			<div class="success-messages"></div> <!--/success-messages-->
@@ -299,21 +308,22 @@ if($_GET['o'] == 'add') {
 
 				$result = $connect->query($sql);
 				$data = $result->fetch_row();
+				echo prettyOrderId($data[0],$data[1]);
   			?>
 
-			  <div class="form-group">
+			  <div class="row">
 			    <label for="orderDate" class="col-sm-2 control-label">Order Date</label>
 			    <div class="col-sm-10">
 			      <input type="text" class="form-control" id="orderDate" name="orderDate" autocomplete="off" value="<?php echo $data[1] ?>" />
 			    </div>
 			  </div> <!--/form-group-->
-			  <div class="form-group">
+			  <div class="row">
 			    <label for="clientName" class="col-sm-2 control-label">Client Name</label>
 			    <div class="col-sm-10">
 			      <input type="text" class="form-control" id="clientName" name="clientName" placeholder="Client Name" autocomplete="off" value="<?php echo $data[2] ?>" />
 			    </div>
 			  </div> <!--/form-group-->
-			  <div class="form-group">
+			  <div class="row">
 			    <label for="clientContact" class="col-sm-2 control-label">Client Contact</label>
 			    <div class="col-sm-10">
 			      <input type="text" class="form-control" id="clientContact" name="clientContact" placeholder="Contact Number" autocomplete="off" value="<?php echo $data[3] ?>" />
@@ -325,16 +335,16 @@ if($_GET['o'] == 'add') {
 			  		<tr>			  			
 			  			<th style="width:40%;">Product</th>
 			  			<th style="width:20%;">Rate</th>
-			  			<th style="width:15%;">Available Quantity</th>			  			
+			  			<th style="width:15%;">Available</th>			  			
 			  			<th style="width:15%;">Quantity</th>			  			
 			  			<th style="width:15%;">Total</th>			  			
-			  			<th style="width:10%;"></th>
+			  			<th style="width:10%;"><button type="button" class="btn btn-default" onclick="addRow()" id="addRowBtn" data-loading-text="Loading..."> <i class="fas fa-plus"></i></button></th>
 			  		</tr>
 			  	</thead>
 			  	<tbody>
 			  		<?php
 
-			  		$orderItemSql = "SELECT ".$db_prefix."order_item.order_item_id, ".$db_prefix."order_item.order_id, ".$db_prefix."order_item.product_id, ".$db_prefix."order_item.quantity, ".$db_prefix."order_item.rate, ".$db_prefix."order_item.total FROM ".$db_prefix."order_item WHERE ".$db_prefix."order_item.order_id = {$orderId}";
+			  		$orderItemSql = "SELECT * FROM ".$db_prefix."order_item WHERE ".$db_prefix."order_item.order_id = {$orderId}";
 						$orderItemResult = $connect->query($orderItemSql);
 						// $orderItemData = $orderItemResult->fetch_all();						
 						
@@ -347,8 +357,9 @@ if($_GET['o'] == 'add') {
 			  			<tr id="row<?php echo $x; ?>" class="<?php echo $arrayNumber; ?>">			  				
 			  				<td style="margin-left:20px;">
 			  					<div class="form-group">
-
-			  					<select class="form-control" name="productName[]" id="productName<?php echo $x; ?>" onchange="getProductData(<?php echo $x; ?>)" >
+										<input type="hidden" name="order_item_id[]" value="<?PHP echo $orderItemData['order_item_id'];?>">
+										<input type="hidden" name="productName[]" id="productName<?php echo $x; ?>" value="<?PHP echo $orderItemData['product_id'];?>">
+			  					<select class="form-control" name="productNameDisplay" disabled="disabled" >
 			  						<option value="">~~SELECT~~</option>
 			  						<?php
 			  							$productSql = "SELECT * FROM ".$db_prefix."product WHERE active = 1 AND status = 1 AND quantity != 0";
@@ -362,7 +373,7 @@ if($_GET['o'] == 'add') {
 			  									$selected = "";
 			  								}
 
-			  								echo "<option value='".$row['product_id']."' id='changeProduct".$row['product_id']."' ".$selected." >".$row['product_name']."</option>";
+			  								echo "<option value='".$row['product_id']."' id='changeProduct".$row['product_id']."' ".$selected." >" .$row['product_name']."</option>";
 										 	} // /while 
 
 			  						?>
@@ -376,33 +387,22 @@ if($_GET['o'] == 'add') {
 							<td style="padding-left:20px;">
 			  					<div class="form-group">
 									<?php
-			  							$productSql = "SELECT * FROM ".$db_prefix."product WHERE active = 1 AND status = 1 AND quantity != 0";
-			  							$productData = $connect->query($productSql);
 
-			  							while($row = $productData->fetch_array()) {									 		
-			  								$selected = "";
-			  								if($row['product_id'] == $orderItemData['product_id']) { 
-			  									echo "<p id='available_quantity".$row['product_id']."'>".$row['quantity']."</p>";
-											}
-			  								 else {
-			  									$selected = "";
-			  								}
-
-			  								//echo "<option value='".$row['product_id']."' id='changeProduct".$row['product_id']."' ".$selected." >".$row['product_name']."</option>";
-										 	} // /while 
-
+											echo "<p id='available_quantity".$row['product_id']."'>" . getProdQty($orderItemData['product_id']) . "</p>";
+			  					
 			  						?>
 									
 			  					</div>
 			  				</td>
 			  				<td style="padding-left:20px;">
 			  					<div class="form-group">
-			  					<input type="number" name="quantity[]" id="quantity<?php echo $x; ?>" onkeyup="getTotal(<?php echo $x ?>)" autocomplete="off" class="form-control" min="1" value="<?php echo $orderItemData['quantity']; ?>" />
+			  					<input type="number" name="quantity[]" id="quantity<?php echo $x; ?>" onkeyup="getTotal(<?php echo $x ?>)" onclick="getTotal(<?php echo $x ?>)" autocomplete="off" class="form-control" min="1" value="<?php echo $orderItemData['quantity']; ?>" />
 			  					</div>
 			  				</td>
 			  				<td style="padding-left:20px;">			  					
 			  					<input type="text" name="total[]" id="total<?php echo $x; ?>" autocomplete="off" class="form-control" disabled="true" value="<?php echo $orderItemData['total']; ?>"/>			  					
-			  					<input type="hidden" name="totalValue[]" id="totalValue<?php echo $x; ?>" autocomplete="off" class="form-control" value="<?php echo $orderItemData['total']; ?>"/>			  					
+									<input type="hidden" name="totalValue[]" id="totalValue<?php echo $x; ?>" autocomplete="off" class="form-control" value="<?php echo $orderItemData['total']; ?>"/>	
+									<input type="hidden" name="order_item_status[]" id="order_item_status<?PHP echo $x;?>" value="<?PHP echo $orderItemData['order_item_status'];?>">		  					
 			  				</td>
 			  				<td>
 
@@ -417,72 +417,15 @@ if($_GET['o'] == 'add') {
 			  	</tbody>			  	
 			  </table>
 
-			  <div class="col-md-6">
-			  	<div class="form-group">
-				    <label for="subTotal" class="col-sm-3 control-label">Sub Amount</label>
-				    <div class="col-sm-9">
-				      <input type="text" class="form-control" id="subTotal" name="subTotal" disabled="true" value="<?php echo $data[4] ?>" />
-				      <input type="hidden" class="form-control" id="subTotalValue" name="subTotalValue" value="<?php echo $data[4] ?>" />
-				    </div>
-				  </div> <!--/form-group-->			  
-				  			  
-				  <div class="form-group">
-				    <label for="totalAmount" class="col-sm-3 control-label">Total Amount</label>
-				    <div class="col-sm-9">
-				      <input type="text" class="form-control" id="totalAmount" name="totalAmount" disabled="true" value="<?php echo $data[6] ?>" />
-				      <input type="hidden" class="form-control" id="totalAmountValue" name="totalAmountValue" value="<?php echo $data[6] ?>"  />
-				    </div>
-				  </div> <!--/form-group-->			  
-				  <div class="form-group">
-				    <label for="discount" class="col-sm-3 control-label">Discount</label>
-				    <div class="col-sm-9">
-				      <input type="text" class="form-control" id="discount" name="discount" onkeyup="discountFunc()" autocomplete="off" value="<?php echo $data[7] ?>" />
-				    </div>
-				  </div> <!--/form-group-->	
-				  <div class="form-group">
-				    <label for="grandTotal" class="col-sm-3 control-label">Grand Total</label>
-				    <div class="col-sm-9">
-				      <input type="text" class="form-control" id="grandTotal" name="grandTotal" disabled="true" value="<?php echo $data[8] ?>"  />
-				      <input type="hidden" class="form-control" id="grandTotalValue" name="grandTotalValue" value="<?php echo $data[8] ?>"  />
-				    </div>
-				  </div> <!--/form-group-->	
-				  <div class="form-group">
-				    <label for="vat" class="col-sm-3 control-label gst"><?php if($data[13] == 2) {echo "IGST 18%";} else echo "GST 18%"; ?></label>
-				    <div class="col-sm-9">
-				      <input type="text" class="form-control" id="vat" name="vat" disabled="true" value="<?php echo $data[5] ?>"  />
-				      <input type="hidden" class="form-control" id="vatValue" name="vatValue" value="<?php echo $data[5] ?>"  />
-				    </div>
-				  </div> 
-				  <div class="form-group">
-				    <label for="gstn" class="col-sm-3 control-label gst">G.S.T.IN</label>
-				    <div class="col-sm-9">
-				      <input type="text" class="form-control" id="gstn" name="gstn" value="<?php echo $data[14] ?>"  />
-				    </div>
-				  </div><!--/form-group-->		  		  
-			  </div> <!--/col-md-6-->
-
-			  <div class="col-md-6">
-			  	<div class="form-group">
-				    <label for="paid" class="col-sm-3 control-label">Paid Amount</label>
-				    <div class="col-sm-9">
-				      <input type="text" class="form-control" id="paid" name="paid" autocomplete="off" onkeyup="paidAmount()" value="<?php echo $data[9] ?>"  />
-				    </div>
-				  </div> <!--/form-group-->			  
-				  <div class="form-group">
-				    <label for="due" class="col-sm-3 control-label">Due Amount</label>
-				    <div class="col-sm-9">
-				      <input type="text" class="form-control" id="due" name="due" disabled="true" value="<?php echo $data[10] ?>"  />
-				      <input type="hidden" class="form-control" id="dueValue" name="dueValue" value="<?php echo $data[10] ?>"  />
-				    </div>
-				  </div> <!--/form-group-->		
-				  <div class="form-group">
-				    <label for="clientContact" class="col-sm-3 control-label">Payment Type</label>
-				    <div class="col-sm-9">
+			  <div class="col-md-12">
+			  	<div class="row">
+						 <label for="clientContact" class="col-sm-3 control-label">Payment Type</label>
+				    <div class="col-sm-3">
 				      <select class="form-control" name="paymentType" id="paymentType" >
 				      	<option value="">~~SELECT~~</option>
 				      	<option value="1" <?php if($data[11] == 1) {
 				      		echo "selected";
-				      	} ?> >Cheque</option>
+				      	} ?> >Check</option>
 				      	<option value="2" <?php if($data[11] == 2) {
 				      		echo "selected";
 				      	} ?>  >Cash</option>
@@ -491,10 +434,16 @@ if($_GET['o'] == 'add') {
 				      	} ?> >Credit Card</option>
 				      </select>
 				    </div>
-				  </div> <!--/form-group-->							  
-				  <div class="form-group">
-				    <label for="clientContact" class="col-sm-3 control-label">Payment Status</label>
-				    <div class="col-sm-9">
+				    <label for="subTotal" class="col-sm-3 control-label">Subtotal</label>
+				    <div class="col-sm-3">
+				      <input type="text" class="form-control" id="subTotal" name="subTotal" disabled="true" value="<?php echo $data[4] ?>" />
+				      <input type="hidden" class="form-control" id="subTotalValue" name="subTotalValue" value="<?php echo $data[4] ?>" />
+				    </div>
+				  </div> <!--/form-group-->			  
+				  			  
+				  <div class="row">
+					<label for="clientContact" class="col-sm-3 control-label">Payment Status</label>
+				    <div class="col-sm-3">
 				      <select class="form-control" name="paymentStatus" id="paymentStatus">
 				      	<option value="">~~SELECT~~</option>
 				      	<option value="1" <?php if($data[12] == 1) {
@@ -508,34 +457,95 @@ if($_GET['o'] == 'add') {
 				      	} ?> >No Payment</option>
 				      </select>
 				    </div>
-				  </div> <!--/form-group-->
-				  <div class="form-group">
-				    <label for="clientContact" class="col-sm-3 control-label">Payment Place</label>
-				    <div class="col-sm-9">
+				    <label for="totalAmount" class="col-sm-3 control-label">Total <small><i>w/tax</i></small></label>
+				    <div class="col-sm-3">
+				      <input type="text" class="form-control" id="totalAmount" name="totalAmount" disabled="true" value="<?php echo $data[6] ?>" />
+				      <input type="hidden" class="form-control" id="totalAmountValue" name="totalAmountValue" value="<?php echo $data[6] ?>"  />
+				    </div>
+				  </div> <!--/form-group-->			  
+				  <div class="row">
+					<label for="clientContact" class="col-sm-3 control-label">Payment Place</label>
+				    <div class="col-sm-3">
 				      <select class="form-control" name="paymentPlace" id="paymentPlace">
 				      	<option value="">~~SELECT~~</option>
 				      	<option value="1" <?php if($data[13] == 1) {
 				      		echo "selected";
-				      	} ?>  >In Gujarat</option>
+				      	} ?>  >Local</option>
 				      	<option value="2" <?php if($data[13] == 2) {
 				      		echo "selected";
-				      	} ?> >Out Gujarat</option>
+				      	} ?> >Out of state</option>
 				      </select>
 				    </div>
-				  </div>							  
+				  
+				    <label for="discount" class="col-sm-3 control-label">Discount<small class="text-red"><i> dollar amount</i></small></label>
+				    <div class="col-sm-3">
+							<input type="text" class="form-control" id="discount" name="discount" onkeyup="discountFunc()" autocomplete="off" value="<?php echo $data[7] ?>" />
+				    </div>
+					</div> <!--/form-group-->
+					
+				  <div class="row">
+					<label for="blank" class="col-sm-3 control-label"></label>
+				    <div class="col-sm-3">	      
+				    </div>
+				    <label for="grandTotal" class="col-sm-3 control-label">Grand Total</label>
+				    <div class="col-sm-3">
+				      <input type="text" class="form-control" id="grandTotal" name="grandTotal" disabled="true" value="<?php echo $data[8] ?>"  />
+				      <input type="hidden" class="form-control" id="grandTotalValue" name="grandTotalValue" value="<?php echo $data[8] ?>"  />
+				    </div>
+				  </div> <!--/form-group-->	
+				  
+				  <div class="row">
+					<label for="blank" class="col-sm-3 control-label"></label>
+				    <div class="col-sm-3">	      
+						</div>
+						<label for="vat" class="col-sm-3 control-label gst">Tax <?PHP echo $ims_tax;?></label>
+				    <div class="col-sm-3">
+				      <input type="text" class="form-control" id="vat" name="gstn" value="<?PHP echo $ims_tax;?>" readonly="true" />
+							<input type="hidden" class="form-control" id="vatValue" name="vatValue" />
+							<input type="hidden" class="form-control" id="taxrate" value="<?PHP echo $ims_tax;?>">
+				    </div>
+				  </div><!--/form-group-->		  		  
 			  </div> <!--/col-md-6-->
 
-
-			  <div class="form-group editButtonFooter">
-			    <div class="col-sm-offset-2 col-sm-10">
-			    <button type="button" class="btn btn-default" onclick="addRow()" id="addRowBtn" data-loading-text="Loading..."> <i class="glyphicon glyphicon-plus-sign"></i> Add Row </button>
+			  <div class="col-md-12">
+			  	<div class="row">
+					<label for="blank" class="col-sm-3 control-label"></label>
+				    <div class="col-sm-3">	      
+				    </div>
+				    <label for="paid" class="col-sm-3 control-label">Paid Amount</label>
+				    <div class="col-sm-3">
+				      <input type="text" class="form-control" id="paid" name="paid" autocomplete="off" onkeyup="paidAmount()" value="<?php echo $data[9] ?>"  />
+				    </div>
+				  </div> <!--/form-group-->			  
+				  <div class="row">
+					<label for="blank" class="col-sm-3 control-label"></label>
+				    <div class="col-sm-3">	      
+				    </div>
+				    <label for="due" class="col-sm-3 control-label">Due Amount</label>
+				    <div class="col-sm-3">
+				      <input type="text" class="form-control" id="due" name="due" disabled="true" value="<?php echo $data[10] ?>"  />
+				      <input type="hidden" class="form-control" id="dueValue" name="dueValue" value="<?php echo $data[10] ?>"  />
+				    </div>
+				  </div> <!--/form-group-->		
+				 						  
+				 
+			
+								<br>
+			  <div class="row justify-content-end editButtonFooter">
+					
+				<label for="blank" class="col-sm-3 control-label"></label>
+				    <div class="col-sm-3">	      
+				    </div>
+			    <div class="col-md-5 ml-auto mr-3">
+			    <button type="button" class="btn btn-default" onclick="addRow()" id="addRowBtn" data-loading-text="Loading..."> <i class="fas fa-plus"></i> Add Row </button>
 
 			    <input type="hidden" name="orderId" id="orderId" value="<?php echo $_GET['i']; ?>" />
 
-			    <button type="submit" id="editOrderBtn" data-loading-text="Loading..." class="btn btn-success"><i class="glyphicon glyphicon-ok-sign"></i> Save Changes</button>
+			    <button type="submit" id="editOrderBtn" data-loading-text="Loading..." class="btn btn-success"><i class="fas fa-thumbs-up"></i> Save Changes</button>
 			      
 			    </div>
-			  </div>
+				</div>
+				<br>
 			</form>
 
 			<?php
@@ -597,8 +607,8 @@ if($_GET['o'] == 'add') {
       	        
       </div> <!--/modal-body-->
       <div class="modal-footer">
-      	<button type="button" class="btn btn-default" data-dismiss="modal"> <i class="glyphicon glyphicon-remove-sign"></i> Close</button>
-        <button type="button" class="btn btn-primary" id="updatePaymentOrderBtn" data-loading-text="Loading..."> <i class="glyphicon glyphicon-ok-sign"></i> Save changes</button>	
+      	<button type="button" class="btn btn-default" data-dismiss="modal"> <i class="fas fa-trash"></i> Close</button>
+        <button type="button" class="btn btn-primary" id="updatePaymentOrderBtn" data-loading-text="Loading..."> <i class="fas fa-thumbs-up"></i> Save changes</button>	
       </div>           
     </div><!-- /.modal-content -->
   </div><!-- /.modal-dialog -->
@@ -620,8 +630,8 @@ if($_GET['o'] == 'add') {
         <p>Do you really want to remove ?</p>
       </div>
       <div class="modal-footer removeProductFooter">
-        <button type="button" class="btn btn-default" data-dismiss="modal"> <i class="glyphicon glyphicon-remove-sign"></i> Close</button>
-        <button type="button" class="btn btn-primary" id="removeOrderBtn" data-loading-text="Loading..."> <i class="glyphicon glyphicon-ok-sign"></i> Save changes</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal"> <i class="fas fa-trash"></i> Close</button>
+        <button type="button" class="btn btn-primary" id="removeOrderBtn" data-loading-text="Loading..."> <i class="fas fa-thumbs-up"></i> Save changes</button>
       </div>
     </div><!-- /.modal-content -->
   </div><!-- /.modal-dialog -->

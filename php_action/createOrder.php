@@ -1,6 +1,5 @@
 <?php 	
-//ALTER TABLE `orders` ADD `payment_place` INT NOT NULL AFTER `payment_status`;
-//TER TABLE `orders` ADD `gstn` VARCHAR(255) NOT NULL AFTER `payment_place`;
+
 require_once 'core.php';
 
 $valid['success'] = array('success' => false, 'messages' => array(), 'order_id' => '');
@@ -22,6 +21,8 @@ if($_POST) {
   $paymentPlace 				= $_POST['paymentPlace'];
   $gstn 				= $_POST['gstn'];
   $userid 				= $_SESSION['userId'];
+
+  //create pretty order id
 
 				
 	$sql = "INSERT INTO ".$db_prefix."orders (order_date, client_name, client_contact, sub_total, vat, total_amount, discount, grand_total, paid, due, payment_type, payment_status,payment_place, gstn,order_status,user_id) VALUES ('$orderDate', '$clientName', '$clientContact', '$subTotalValue', '$vatValue', '$totalAmountValue', '$discount', '$grandTotalValue', '$paid', '$dueValue', $paymentType, $paymentStatus,$paymentPlace,$gstn, 1,$userid)";
