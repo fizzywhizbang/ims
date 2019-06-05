@@ -2,7 +2,13 @@
 
 require_once 'core.php';
 
-$sql = "SELECT * FROM ".$db_prefix."clients where client_name like \"".$_GET["term"]."%\" order by client_name";
+if(!isset($_GET["term"])){
+   $str="%";
+} else {
+   $str=$_GET["term"];
+}
+
+$sql = "SELECT * FROM ".$db_prefix."clients where client_name like \"".$str."%\" order by client_name";
 $result = $connect->query($sql);
 
 //$output = array();

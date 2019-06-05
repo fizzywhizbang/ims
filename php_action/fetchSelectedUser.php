@@ -4,7 +4,7 @@ require_once 'core.php';
 
 $userid = $_POST['userid'];
 
-$sql = "SELECT * FROM users WHERE user_id = $userid";
+$sql = "SELECT * FROM ".$db_prefix."users WHERE user_id = $userid";
 $result = $connect->query($sql);
 
 if($result->num_rows > 0) { 
