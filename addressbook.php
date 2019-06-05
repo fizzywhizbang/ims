@@ -251,6 +251,7 @@
 
 <!-- categories brand -->
 <div class="modal fade" tabindex="-1" role="dialog" id="removeUserModal">
+<form class="form-horizontal" id="removeUserForm" action="php_action/editClient.php" method="POST">		
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
@@ -265,11 +266,13 @@
         <p>Do you really want to remove ?</p>
       </div>
       <div class="modal-footer removeProductFooter">
+				<input type="hidden" name="clientid" id="clientid">
         <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fas fa-window-close    "></i>  Close</button>
         <button type="button" class="btn btn-primary" id="removeProductBtn" data-loading-text="Loading..."> <i class="fas fa-thumbs-up"></i> Save changes</button>
       </div>
     </div><!-- /.modal-content -->
-  </div><!-- /.modal-dialog -->
+	</div><!-- /.modal-dialog -->
+</form>
 </div><!-- /.modal -->
 <!-- /categories brand -->
 

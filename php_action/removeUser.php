@@ -9,7 +9,7 @@ $userid = $_POST['userid'];
 
 if($userid) { 
 
- $sql = "DELETE FROM users  WHERE user_id = {$userid}";
+ $sql = "DELETE FROM ".$db_prefix."users  WHERE user_id = {$userid}";
 
  if($connect->query($sql) === TRUE) {
  	$valid['success'] = true;

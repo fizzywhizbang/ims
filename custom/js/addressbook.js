@@ -263,16 +263,17 @@ function editUser(userid = null) {
 } // /edit product function
 
 // remove product 
-function removeUser(userid = null) {
-	if(userid) {
+function removeUser(clientid = null) {
+	$("#clientid").val(clientid);
+	if(clientid) {
 		// remove product button clicked
 		$("#removeProductBtn").unbind('click').bind('click', function() {
 			// loading remove button
 			$("#removeProductBtn").button('loading');
 			$.ajax({
-				url: 'php_action/removeUser.php',
+				url: 'php_action/removeClient.php',
 				type: 'post',
-				data: {userid: userid},
+				data: {clientid: clientid},
 				dataType: 'json',
 				success:function(response) {
 					// loading remove button
@@ -287,7 +288,7 @@ function removeUser(userid = null) {
 						// remove success messages
 						$(".remove-messages").html('<div class="alert alert-success">'+
 		            '<button type="button" class="close" data-dismiss="alert">&times;</button>'+
-		            '<strong><i class="glyphicon glyphicon-ok-sign"></i></strong> '+ response.messages +
+		            '<strong><i class="fas fa-thumbs-up"></i></strong> '+ response.messages +
 		          '</div>');
 
 						// remove the mesages
@@ -301,7 +302,7 @@ function removeUser(userid = null) {
 						// remove success messages
 						$(".removeUserMessages").html('<div class="alert alert-success">'+
 		            '<button type="button" class="close" data-dismiss="alert">&times;</button>'+
-		            '<strong><i class="glyphicon glyphicon-ok-sign"></i></strong> '+ response.messages +
+		            '<strong><i class="fas fa-thumbs-up"></i></strong> '+ response.messages +
 		          '</div>');
 
 						// remove the mesages
@@ -319,32 +320,3 @@ function removeUser(userid = null) {
 	} // /if userid
 } // /remove product function
 
-function clearForm(oForm) {
-	// var frm_elements = oForm.elements;									
-	// console.log(frm_elements);
-	// 	for(i=0;i<frm_elements.length;i++) {
-	// 		field_type = frm_elements[i].type.toLowerCase();									
-	// 		switch (field_type) {
-	// 	    case "text":
-	// 	    case "password":
-	// 	    case "textarea":
-	// 	    case "hidden":
-	// 	    case "select-one":	    
-	// 	      frm_elements[i].value = "";
-	// 	      break;
-	// 	    case "radio":
-	// 	    case "checkbox":	    
-	// 	      if (frm_elements[i].checked)
-	// 	      {
-	// 	          frm_elements[i].checked = false;
-	// 	      }
-	// 	      break;
-	// 	    case "file": 
-	// 	    	if(frm_elements[i].options) {
-	// 	    		frm_elements[i].options= false;
-	// 	    	}
-	// 	    default:
-	// 	        break;
-	//     } // /switch
-	// 	} // for
-}
