@@ -7,7 +7,7 @@ $valid['success'] = array('success' => false, 'messages' => array(), 'order_id' 
 if($_POST) {	
 
 	$orderDate 						= date('Y-m-d', strtotime($_POST['orderDate']));	
-  $clientName 					= $_POST['clientName'];
+  $clientName 					= $_POST['client_id'];
   $clientContact 				= $_POST['clientContact'];
   $subTotalValue 				= $_POST['subTotalValue'];
   $vatValue 						=	$_POST['vatValue'];
@@ -22,19 +22,24 @@ if($_POST) {
   $gstn 				= $_POST['gstn'];
   $userid 				= $_SESSION['userId'];
 
+
+
+  
+
   //create pretty order id
 
 				
-	$sql = "INSERT INTO ".$db_prefix."orders (order_date, client_name, client_contact, sub_total, vat, total_amount, discount, grand_total, paid, due, payment_type, payment_status,payment_place, gstn,order_status,user_id) VALUES ('$orderDate', '$clientName', '$clientContact', '$subTotalValue', '$vatValue', '$totalAmountValue', '$discount', '$grandTotalValue', '$paid', '$dueValue', $paymentType, $paymentStatus,$paymentPlace,$gstn, 1,$userid)";
+  $sql = "INSERT INTO ".$db_prefix."orders (order_date, client_name, client_contact, sub_total, vat, total_amount, discount, grand_total, paid, due, payment_type, payment_status,payment_place, gstn,order_status,user_id) VALUES ('$orderDate', '$clientName', '$clientContact', '$subTotalValue', '$vatValue', '$totalAmountValue', '$discount', '$grandTotalValue', '$paid', '$dueValue', $paymentType, $paymentStatus,$paymentPlace,$gstn, 1,$userid)";
 	
-	$order_id;
-	$orderStatus = false;
-	if($connect->query($sql) === true) {
-		$order_id = $connect->insert_id;
-		$valid['order_id'] = $order_id;	
-
-		$orderStatus = true;
-	}
+  $order_id;
+  $orderStatus = false;
+  if($connect->query($sql) === true) {
+	  $order_id = $connect->insert_id;
+	  $valid['order_id'] = $order_id;	
+	  $query="update " . $db_prefix . "orders set orderid='" . prettyOrderId($order_id, $orderDate) . "' where order_id=" . $order_id;
+	  $connect->query($query);
+	  $orderStatus = true;
+  }
 
 		
 	// echo $_POST['productName'];

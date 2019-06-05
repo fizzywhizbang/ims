@@ -2,7 +2,7 @@
 
 require_once 'core.php';
 
-$sql = "SELECT order_id, order_date, client_name, client_contact, payment_status FROM ".$db_prefix."orders WHERE order_status = 1";
+$sql = "SELECT order_id, order_date, client_name, client_contact, payment_status, orderid FROM ".$db_prefix."orders WHERE order_status = 1";
 $result = $connect->query($sql);
 
 
@@ -53,7 +53,7 @@ if($result->num_rows > 0) {
  		// image
  		$x,
  		// order date
- 		$row[1],
+ 		$row[5],
  		// client name
  		$row[2], 
  		// client contact

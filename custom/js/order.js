@@ -28,12 +28,17 @@ $(document).ready(function() {
 							}
 						} );
 					},
-					minLength: 2,
-					delay: 400,
+					minLength: 1,
+					delay: 200,
 			select: function (event, ui) {
 			 // Set selection
 			 $('#clientName').val(ui.item.label); // display the selected text
-				$('#clientContact').val(ui.item.value);
+			 $('#clientContact').val(ui.item.value);
+			 $('#clientAddr').val(ui.item.address);
+			 $('#clientCity').val(ui.item.city);
+			 $('#clientState').val(ui.item.state);
+			 $('#clientZip').val(ui.item.zip); 
+			 $('#client_id').val(ui.item.client_id); 
 			 return false;
 			}
 			} );

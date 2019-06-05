@@ -29,9 +29,15 @@ if($result->num_rows > 0) {
     $client_state=$row[6];
     $client_zip=$row[7];
     $client_info=$row[8];
+
  	$output[] = array( 	
+         'label' => $client_name,
          'value' => $client_phone,
-         'label' => $client_name,	
+         'address' => $client_address,
+         'city' => $client_city,
+         'state' => $client_state,
+         'zip' => $client_zip,
+         'client_id' => $client_id	
         // $client_name,
         // $client_phone,
         // $client_email,

@@ -73,32 +73,68 @@ if($_GET['o'] == 'add') {
 			<div class="success-messages"></div> <!--/success-messages-->
 
   		<form class="form-horizontal" method="POST" action="php_action/createOrder.php" id="createOrderForm" autocomplete="off">
-
+			<!-- order form header -->
 			  <div class="row">
-			    <label for="orderDate" class="col-sm-2 control-label">Order Date</label>
-			    <div class="col-sm-10">
+			    <label for="orderDate" class="col-sm-1 control-label">Date</label>
+			    <div class="col-sm-2">
 			      <input type="text" class="form-control" id="orderDate" value="<?PHP echo date("Y-m-d");?>" name="orderDate" autocomplete="off" />
+					</div>
+					<label for="blank" class="col-sm-2 control-label"></label>
+					<label for="clientName" class="col-sm-2 control-label">Client Name</label>
+			    <div class="col-sm-5">
+			      <input type="text" class="form-control" id="clientName" name="clientName"  placeholder="Client Name" autocomplete="off" />
 			    </div>
 			  </div> <!--/form-group-->
 			  <div class="row">
-			    <label for="clientName" class="col-sm-2 control-label">Client Name</label>
-			    <div class="col-sm-10">
-			      <input type="text" class="form-control" id="clientName" name="clientName" placeholder="Client Name" autocomplete="off" />
+					<label for="orderNumber" class="col-sm-1 control-label">Order #</label>
+					<div class="col-sm-2">
+						<input type="text" class="form-control" name="orderid" id="orderid" value="<?PHP echo prettyOrderId(getNextId(),date("Y-m-d")); ?>" readonly="readonly">
+					</div>
+					<label for="blank" class="col-sm-2 control-label"></label>
+					<label for="clientName" class="col-sm-2 control-label">Address</label>
+			    <div class="col-sm-5">
+			      <input type="text" class="form-control" id="clientAddr" name="clientAddr" placeholder="Address" autocomplete="off" />
 			    </div>
-			  </div> <!--/form-group-->
+				</div> <!--/form-group-->
+				<div class="form-row">
+				<label for="orderNumber" class="col-sm-1 control-label"></label>
+					<div class="col-sm-2">
+						&nbsp;
+					</div>
+					<label for="blank" class="col-sm-2 control-label"></label>
+			    <label for="clientContact" class="col-sm-2 control-label">City/ST/Zip</label>
+			    
+						<div class="col">
+						<input type="text" class="form-control" id="clientCity" name="clientCity" placeholder="City" autocomplete="off" />
+						</div>
+						<div class="col">
+						<input type="text" class="form-control" id="clientState" name="clientState" placeholder="ST" autocomplete="off" />
+						</div>
+						<div class="col">
+						<input type="text" class="form-control" id="clientZip" name="clientZip" placeholder="Zip" autocomplete="off" />
+						</div>
+						<input type="hidden" name="client_id" id="client_id">
+						
+			    
+			  </div> <!--/form-group-->		
 			  <div class="row">
-			    <label for="clientContact" class="col-sm-2 control-label">Client Contact</label>
-			    <div class="col-sm-10">
+				<label for="orderNumber" class="col-sm-1 control-label"></label>
+					<div class="col-sm-2">
+						&nbsp;
+					</div>
+					<label for="blank" class="col-sm-2 control-label"></label>
+			    <label for="clientContact" class="col-sm-2 control-label">Phone</label>
+			    <div class="col-sm-5">
 			      <input type="text" class="form-control" id="clientContact" name="clientContact" placeholder="Contact Number" autocomplete="off" />
 			    </div>
 			  </div> <!--/form-group-->			  
-
+	<!-- end order form header -->
 			  <table class="table" id="productTable">
 			  	<thead>
 			  		<tr>			  			
 			  			<th style="width:40%;">Product</th>
 			  			<th style="width:20%;">Rate</th>
-			  			<th style="width:10%;">Available Quantity</th>
+			  			<th style="width:10%;">Available</th>
 			  			<th style="width:15%;">Quantity</th>			  			
 			  			<th style="width:25%;">Total</th>			  			
 			  			<th style="width:10%;"><i class="fas fa-plus text-success" onclick="addRow()"></i></th>
@@ -203,7 +239,7 @@ if($_GET['o'] == 'add') {
 						</div>
 						<label for="discount" class="col-sm-3 control-label">Discount<small class="text-red"><i> dollar amount</i></small></label>
 				    <div class="col-sm-3">
-				      <input type="text" class="form-control" id="discount" name="discount" onkeyup="discountFunc()" autocomplete="off" />
+				      <input type="text" class="form-control" id="discount" name="discount" value="0" onkeyup="discountFunc()" autocomplete="off" />
 				    </div>
 				    
 				  </div> <!--/form-group-->	
@@ -238,7 +274,7 @@ if($_GET['o'] == 'add') {
 				    </div>
 				    <label for="paid" class="col-sm-3 control-label">Paid Amount</label>
 				    <div class="col-sm-3">
-				      <input type="text" class="form-control" id="paid" name="paid" autocomplete="off" onkeyup="paidAmount()" />
+				      <input type="text" class="form-control" id="paid" name="paid" value="0" autocomplete="off" onkeyup="paidAmount()" />
 				    </div>
 				  </div> <!--/form-group-->			  
 				  <div class="row">
@@ -273,14 +309,13 @@ if($_GET['o'] == 'add') {
 		<?php } else if($_GET['o'] == 'manord') { 
 			// manage order
 			?>
-
 			<div id="success-messages"></div>
 			
 			<table class="table" id="manageOrderTable">
 				<thead>
 					<tr>
 						<th>#</th>
-						<th>Order Date</th>
+						<th>Order Number</th>
 						<th>Client Name</th>
 						<th>Contact</th>
 						<th>Total Order Item</th>
@@ -308,27 +343,70 @@ if($_GET['o'] == 'add') {
 
 				$result = $connect->query($sql);
 				$data = $result->fetch_row();
-				echo prettyOrderId($data[0],$data[1]);
-  			?>
+				
+				$query="select * from " . $db_prefix ."clients where id_clients=" . $data[2];
+				$client_result=$connect->query($query);
+				$clientData=$client_result->fetch_row();
 
-			  <div class="row">
-			    <label for="orderDate" class="col-sm-2 control-label">Order Date</label>
-			    <div class="col-sm-10">
-			      <input type="text" class="form-control" id="orderDate" name="orderDate" autocomplete="off" value="<?php echo $data[1] ?>" />
+
+  			?>
+				
+				<div class="row">
+					<label for="orderDate" class="col-sm-1 control-label">Date</label>
+					
+			    <div class="col-sm-2">
+			      <input type="text" class="form-control" id="orderDate" value="<?php echo $data[1] ?>" name="orderDate" autocomplete="off" />
+					</div>
+					<label for="blank" class="col-sm-2 control-label"></label>
+					<label for="clientName" class="col-sm-2 control-label">Client Name</label>
+			    <div class="col-sm-5">
+						<input type="text" class="form-control" id="clientName" name="clientName" value="<?PHP echo $clientData[1]; ?>" placeholder="Client Name" autocomplete="off" />
+						<input type="hidden" name="client_id" id="client_id" value="<?PHP echo $clientData[0];?>">
 			    </div>
 			  </div> <!--/form-group-->
 			  <div class="row">
-			    <label for="clientName" class="col-sm-2 control-label">Client Name</label>
-			    <div class="col-sm-10">
-			      <input type="text" class="form-control" id="clientName" name="clientName" placeholder="Client Name" autocomplete="off" value="<?php echo $data[2] ?>" />
+					<label for="orderNumber" class="col-sm-1 control-label">Order #</label>
+					<div class="col-sm-2">
+						<input type="text" class="form-control" name="orderNumber" id="orderNumber" value="<?PHP echo prettyOrderId($data[0],$data[1]); ?>" readonly="readonly">
+					</div>
+					<label for="blank" class="col-sm-2 control-label"></label>
+					<label for="clientName" class="col-sm-2 control-label">Address</label>
+			    <div class="col-sm-5">
+			      <input type="text" class="form-control" id="clientAddr" readonly="readonly" name="clientAddr" value="<?PHP echo $clientData[4]; ?>" placeholder="Address" autocomplete="off" />
 			    </div>
-			  </div> <!--/form-group-->
+				</div> <!--/form-group-->
+				<div class="form-row">
+				<label for="orderNumber" class="col-sm-1 control-label"></label>
+					<div class="col-sm-2">
+						&nbsp;
+					</div>
+					<label for="blank" class="col-sm-2 control-label"></label>
+			    <label for="clientContact" class="col-sm-2 control-label">City/ST/Zip</label>
+			    
+						<div class="col">
+						<input type="text" class="form-control" id="clientCity" readonly="readonly" name="clientCity" value="<?PHP echo $clientData[5]; ?>" placeholder="City" autocomplete="off" />
+						</div>
+						<div class="col">
+						<input type="text" class="form-control" id="clientState" readonly="readonly" name="clientState" value="<?PHP echo $clientData[6]; ?>" placeholder="ST" autocomplete="off" />
+						</div>
+						<div class="col">
+						<input type="text" class="form-control" id="clientZip" readonly="readonly" name="clientZip" placeholder="Zip" value="<?PHP echo $clientData[7]; ?>" autocomplete="off" />
+						</div>
+						
+						
+			    
+			  </div> <!--/form-group-->		
 			  <div class="row">
-			    <label for="clientContact" class="col-sm-2 control-label">Client Contact</label>
-			    <div class="col-sm-10">
-			      <input type="text" class="form-control" id="clientContact" name="clientContact" placeholder="Contact Number" autocomplete="off" value="<?php echo $data[3] ?>" />
+				<label for="orderNumber" class="col-sm-1 control-label"></label>
+					<div class="col-sm-2">
+						&nbsp;
+					</div>
+					<label for="blank" class="col-sm-2 control-label"></label>
+			    <label for="clientContact" class="col-sm-2 control-label">Phone</label>
+			    <div class="col-sm-5">
+			      <input type="text" class="form-control" id="clientContact" value="<?PHP echo $clientData[2]; ?>" name="clientContact" readonly="readonly" placeholder="Contact Number" autocomplete="off" />
 			    </div>
-			  </div> <!--/form-group-->			  
+			  </div> <!--/form-group-->	
 
 			  <table class="table" id="productTable">
 			  	<thead>
@@ -452,7 +530,7 @@ if($_GET['o'] == 'add') {
 				      	<option value="2" <?php if($data[12] == 2) {
 				      		echo "selected";
 				      	} ?> >Advance Payment</option>
-				      	<option value="3" <?php if($data[10] == 3) {
+				      	<option value="3" <?php if($data[12] == 3) {
 				      		echo "selected";
 				      	} ?> >No Payment</option>
 				      </select>
