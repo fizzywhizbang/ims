@@ -5,7 +5,7 @@ $(document).ready(function() {
 	$('#navAddrbook').addClass('active');
 	// manage product data table
 	manageUserTable = $('#manageUserTable').DataTable({
-		'ajax': 'php_action/fetchClients.php',
+		'ajax': 'php_action/fetchClientList.php',
 		'order': []
 	});
 
@@ -23,10 +23,11 @@ $(document).ready(function() {
 		// submit client form
 		$("#submitUserForm").unbind('submit').bind('submit', function() {
 			// form validation
-			var userName = $("#clientname").val();
+            var clientName = $("#clientname").val();
+            var clientPhone = $("#phone").val();
             var submitform = false;
             
-			if(userName == "") {
+			if(clientName == "") {
 				$("#clientname").after('<p class="text-danger">User name field is required</p>');
                 $('#clientname').closest('.form-group').addClass('has-error');
 			}	else {
@@ -36,7 +37,18 @@ $(document).ready(function() {
                 $("#clientname").closest('.form-group').addClass('has-success');
                 submitform = true;	  	
 			}	// /else
-
+            
+            if(clientPhone == "") {
+				$("#phone").after('<p class="text-danger">Phone number field is required</p>');
+                $('#phone').closest('.form-group').addClass('has-error');
+                submitform = false;
+			}	else {
+				// remov error text field
+				$("#phone").find('.text-danger').remove();
+				// success out for form 
+                $("#phone").closest('.form-group').addClass('has-success');
+                submitform = true;	  	
+			}	// /else
 			
 
 			
@@ -70,7 +82,7 @@ $(document).ready(function() {
 							// shows a successful message after operation
 							$('#add-user-messages').html('<div class="alert alert-success">'+
 		            '<button type="button" class="close" data-dismiss="alert">&times;</button>'+
-		            '<strong><i class="glyphicon glyphicon-ok-sign"></i></strong> '+ response.messages +
+		            '<strong><i class="fas fa-thumbs-up"></i></strong> '+ response.messages +
 		          '</div>');
 
 							// remove the mesages
@@ -116,11 +128,11 @@ function editUser(userid = null) {
 		$('.div-loading').removeClass('div-hide');
 		// modal div
 		$('.div-result').addClass('div-hide');
-
+        
 		$.ajax({
-			url: 'php_action/fetchSelectedUser.php',
+			url: 'php_action/fetchSelectedClient.php',
 			type: 'post',
-			data: {"userid": userid},
+			data: {"clientid": userid},
 			dataType: 'json',
 			success:function(response) {		
 			// alert(response.product_image);
@@ -131,41 +143,51 @@ function editUser(userid = null) {
 
 			
 
-				// product id 
-				$(".editUserFooter").append('<input type="hidden" name="userid" id="userid" value="'+response.user_id+'" />');				
-				$(".editUserPhotoFooter").append('<input type="hidden" name="userid" id="userid" value="'+response.user_id+'" />');				
+				// clientid
+                $("#id_clients").val(response.id_clients);
+                
+				// client name
+                $("#eclientname").val(response.client_name);
+                $("#eaddress").val(response.client_address);
+                $("#ephone").val(response.client_phone);
+                $("#estate").val(response.client_state);
+                $("#ecity").val(response.client_city);
+                $("#ezip").val(response.client_zip);
+                $("#einfo").val(response.client_info);
 				
-				// product name
-				$("#edituserName").val(response.username);
-				// quantity
-				//$("#editPassword").val(response.quantity);
 				
 				// update the product data function
 				$("#editUserForm").unbind('submit').bind('submit', function() {
 
-					// form validation
-					var username = $("#edituserName").val();
-					var userpassword = $("#editPassword").val();
+                    // form validation
+                    var clientName = $("#eclientname").val();
+                    var clientPhone = $("#ephone").val();
+                    var submitform = false;
+					
 								
 
-					if(username == "") {
-						$("#edituserName").after('<p class="text-danger">User Name field is required</p>');
-						$('#edituserName').closest('.form-group').addClass('has-error');
+					if(clientName == "") {
+						$("#eclientname").after('<p class="text-danger">Client Name field is required</p>');
+                        $('#eclientname').closest('.form-group').addClass('has-error');
+                        submitform = false;
 					}	else {
 						// remov error text field
-						$("#edituserName").find('.text-danger').remove();
+						$("#eclientname").find('.text-danger').remove();
 						// success out for form 
-						$("#edituserName").closest('.form-group').addClass('has-success');	  	
+                        $("#eclientname").closest('.form-group').addClass('has-success');	
+                        submitform = true;  	
 					}	// /else
 
-					if(userpassword == "") {
-						$("#editPassword").after('<p class="text-danger">Password field is required</p>');
-						$('#editPassword').closest('.form-group').addClass('has-error');
+					if(clientPhone == "") {
+						$("#ephone").after('<p class="text-danger">Phone field is required</p>');
+                        $('#ephone').closest('.form-group').addClass('has-error');
+                        submitform = false;
 					}	else {
 						// remov error text field
-						$("#editPassword").find('.text-danger').remove();
+						$("#ephone").find('.text-danger').remove();
 						// success out for form 
-						$("#editPassword").closest('.form-group').addClass('has-success');	  	
+                        $("#ephone").closest('.form-group').addClass('has-success');	
+                        submitform = true;  	
 					}	// /else
 
 					
@@ -176,7 +198,7 @@ function editUser(userid = null) {
 
 									
 
-					if(userpassword && username) {
+					if(submitform == true) {
 						// submit loading button
 						$("#editUserBtn").button('loading');
 
@@ -202,7 +224,7 @@ function editUser(userid = null) {
 									// shows a successful message after operation
 									$('#edit-user-messages').html('<div class="alert alert-success">'+
 				            '<button type="button" class="close" data-dismiss="alert">&times;</button>'+
-				            '<strong><i class="glyphicon glyphicon-ok-sign"></i></strong> '+ response.messages +
+				            '<strong><i class="fas fa-thumbs-up"></i></strong> '+ response.messages +
 				          '</div>');
 
 									// remove the mesages
@@ -229,83 +251,7 @@ function editUser(userid = null) {
 					return false;
 				}); // update the product data function
 
-				// update the product image				
-				$("#updateProductImageForm").unbind('submit').bind('submit', function() {					
-					// form validation
-					var productImage = $("#editProductImage").val();					
-					
-					if(productImage == "") {
-						$("#editProductImage").closest('.center-block').after('<p class="text-danger">Product Image field is required</p>');
-						$('#editProductImage').closest('.form-group').addClass('has-error');
-					}	else {
-						// remov error text field
-						$("#editProductImage").find('.text-danger').remove();
-						// success out for form 
-						$("#editProductImage").closest('.form-group').addClass('has-success');	  	
-					}	// /else
-
-					if(productImage) {
-						// submit loading button
-						$("#editProductImageBtn").button('loading');
-
-						var form = $(this);
-						var formData = new FormData(this);
-
-						$.ajax({
-							url : form.attr('action'),
-							type: form.attr('method'),
-							data: formData,
-							dataType: 'json',
-							cache: false,
-							contentType: false,
-							processData: false,
-							success:function(response) {
-								
-								if(response.success == true) {
-									// submit loading button
-									$("#editProductImageBtn").button('reset');																		
-
-									$("html, body, div.modal, div.modal-content, div.modal-body").animate({scrollTop: '0'}, 100);
-																			
-									// shows a successful message after operation
-									$('#edit-productPhoto-messages').html('<div class="alert alert-success">'+
-				            '<button type="button" class="close" data-dismiss="alert">&times;</button>'+
-				            '<strong><i class="glyphicon glyphicon-ok-sign"></i></strong> '+ response.messages +
-				          '</div>');
-
-									// remove the mesages
-				          $(".alert-success").delay(500).show(10, function() {
-										$(this).delay(3000).hide(10, function() {
-											$(this).remove();
-										});
-									}); // /.alert
-
-				          // reload the manage student table
-									manageUserTable.ajax.reload(null, true);
-
-									$(".fileinput-remove-button").click();
-
-									$.ajax({
-										url: 'php_action/fetchProductImageUrl.php?i='+userid,
-										type: 'post',
-										success:function(response) {
-										$("#getProductImage").attr('src', response);		
-										}
-									});																		
-
-									// remove text-error 
-									$(".text-danger").remove();
-									// remove from-group error
-									$(".form-group").removeClass('has-error').removeClass('has-success');
-
-								} // /if response.success
-								
-							} // /success function
-						}); // /ajax function
-					}	 // /if validation is ok 					
-
-					return false;
-				}); // /update the product image
+				
 
 			} // /success function
 		}); // /ajax to fetch product image

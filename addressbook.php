@@ -42,7 +42,7 @@
   <div class="modal-dialog">
     <div class="modal-content">
 
-    	<form class="form-horizontal" id="submitUserForm" action="php_action/createUser.php" method="POST" enctype="multipart/form-data">
+    	<form class="form-horizontal" id="submitUserForm" action="php_action/createClient.php" method="POST" enctype="multipart/form-data">
 	      <div class="modal-header">
 				<h4 class="modal-title"><i class="fa fa-plus"></i> Add Contact</h4>
 	        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
@@ -134,7 +134,7 @@
     <div class="modal-content">
     	    	
 	      <div class="modal-header">
-				<h4 class="modal-title"><i class="fa fa-edit"></i> Edit User</h4>
+				<h4 class="modal-title"><i class="fa fa-edit"></i> Edit Client</h4>
 	        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 	        
 	      </div>
@@ -149,7 +149,7 @@
 
 				  <!-- Nav tabs -->
 				  <ul class="nav nav-tabs" role="tablist">
-				    <li role="presentation" class="active"><a href="#userInfo" aria-controls="profile" role="tab" data-toggle="tab">User Info</a></li>    
+				    <li role="presentation" class="active"><a href="#userInfo" aria-controls="profile" role="tab" data-toggle="tab">Client Info</a></li>    
 				  </ul>
 
 				  <!-- Tab panes -->
@@ -159,33 +159,77 @@
 				    
 				    <!-- product image -->
 				    <div role="tabpanel" class="tab-pane active" id="userInfo">
-				    	<form class="form-horizontal" id="editUserForm" action="php_action/editUser.php" method="POST">				    
+				    	<form class="form-horizontal" id="editUserForm" action="php_action/editClient.php" method="POST">				    
 				    	<br />
 
 				    	<div id="edit-user-messages"></div>
 
-				    	<div class="form-group">
-			        		<label for="edituserName" class="col-sm-3 control-label">User Name: </label>
-			        	
-						    <div class="col-sm-8">
-						      <input type="text" class="form-control" id="edituserName" placeholder="User Name" name="edituserName" autocomplete="off">
-						    </div>
-			        	</div> <!-- /form-group-->	    
+				    	<div class="row">
+	        	<label for="clientname" class="col-sm-3 control-label">Client Name: </label>
+	        	
+				    <div class="col-sm-8">
+				      <input type="text" class="form-control" id="eclientname" placeholder="client name" name="clientname" autocomplete="off">
+				    </div>
+	        </div> <!-- /form-group-->	    
 
-				        <div class="form-group">
-				        	<label for="editPassword" class="col-sm-3 control-label">Password: </label>
-				        	
-							    <div class="col-sm-8">
-							      <input type="password" class="form-control" id="editPassword" placeholder="Password" name="editPassword" autocomplete="off">
-							    </div>
-				        </div> <!-- /form-group-->	        	 
+	        <div class="row">
+	        	<label for="phone" class="col-sm-3 control-label">Phone: </label>
+	        	
+				    <div class="col-sm-8">
+				      <input type="text" class="form-control" id="ephone" placeholder="Phone" name="phone" autocomplete="off">
+				    </div>
+	        </div> <!-- /form-group-->	        	 
+
+	        <div class="row">
+	        	<label for="uemail" class="col-sm-3 control-label">Email: </label>
+	        	
+				    <div class="col-sm-8">
+				      <input type="email" class="form-control" id="euemail" placeholder="Email" name="uemail" autocomplete="off">
+				    </div>
+	        </div> <!-- /form-group-->	 
+            <div class="row">
+	        	<label for="address" class="col-sm-3 control-label">Address: </label>
+	        	
+				    <div class="col-sm-8">
+				      <input type="text" class="form-control" id="eaddress" placeholder="Address" name="address" autocomplete="off">
+				    </div>
+            </div> <!-- /form-group-->
+            <div class="row">
+	        	<label for="city" class="col-sm-3 control-label">City: </label>
+	        	
+				    <div class="col-sm-8">
+				      <input type="text" class="form-control" id="ecity" placeholder="City" name="city" autocomplete="off">
+				    </div>
+            </div> <!-- /form-group-->
+            <div class="row">
+	        	<label for="state" class="col-sm-3 control-label">State: </label>
+	        	
+				    <div class="col-sm-8">
+				      <input type="text" class="form-control" id="estate" placeholder="ST" name="state" autocomplete="off">
+				    </div>
+            </div> <!-- /form-group-->
+            <div class="row">
+	        	<label for="zip" class="col-sm-3 control-label">Zip: </label>
+	        	
+				    <div class="col-sm-8">
+				      <input type="text" class="form-control" id="ezip" placeholder="12345" name="zip" autocomplete="off">
+				    </div>
+            </div> <!-- /form-group-->
+            <div class="row">
+	        	<label for="info" class="col-sm-3 control-label">Info: </label>
+	        	
+				    <div class="col-sm-8">
+                        <textarea rows="5" cols="30" name="info" id="einfo"></textarea>
+				      
+				    </div>
+	        </div> <!-- /form-group-->	    	 
 
 			         
          	        
 
 			        <div class="modal-footer editUserFooter">
 				        <button type="button" class="btn btn-default" data-dismiss="modal"> <i class="fas fa-window-close    "></i> Close</button>
-				        
+				        <input type="hidden" name="id_clients" id="id_clients" />
 				        <button type="submit" class="btn btn-success" id="editProductBtn" data-loading-text="Loading..."> <i class="fas fa-tuhumbs-up"></i> Save Changes</button>
 				      </div> <!-- /modal-footer -->				     
 			        </form> <!-- /.form -->				     	
