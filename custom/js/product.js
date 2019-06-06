@@ -246,7 +246,7 @@ function editProduct(productId = null) {
 				$("#editCategoryName").val(response.categories_id);
 				// status
 				$("#editProductStatus").val(response.active);
-
+				$("#editProdDesc").val(response.description);
 				// update the product data function
 				$("#editProductForm").unbind('submit').bind('submit', function() {
 

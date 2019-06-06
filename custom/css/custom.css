@@ -81,3 +81,8 @@ a {
 .ui-autocomplete-loading {
   background: white url("../../assets/images/ui-anim_basic_16x16.gif") right center no-repeat;
 }
+
+.small-input {
+  width: 80px!important;
+  text-align: left!important;
+}

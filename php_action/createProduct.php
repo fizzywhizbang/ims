@@ -13,6 +13,7 @@ if($_POST) {
   $brandName 			= $_POST['brandName'];
   $categoryName 	= $_POST['categoryName'];
   $productStatus 	= $_POST['productStatus'];
+  $prodDesc =  addslashes($_POST['prodDesc']);
 
 	$type = explode('.', $_FILES['productImage']['name']);
 	$type = $type[count($type)-1];		
@@ -21,8 +22,8 @@ if($_POST) {
 		if(is_uploaded_file($_FILES['productImage']['tmp_name'])) {			
 			if(move_uploaded_file($_FILES['productImage']['tmp_name'], $url)) {
 				
-				$sql = "INSERT INTO ".$db_prefix."product (product_name, product_image, brand_id, categories_id, quantity, rate, active, status) 
-				VALUES ('$productName', '$url', '$brandName', '$categoryName', '$quantity', '$rate', '$productStatus', 1)";
+				$sql = "INSERT INTO ".$db_prefix."product (product_name, product_image, brand_id, categories_id, quantity, rate, active, status, description) 
+				VALUES ('$productName', '$url', '$brandName', '$categoryName', '$quantity', '$rate', '$productStatus', 1,'$prodDesc')";
 
 				if($connect->query($sql) === TRUE) {
 					$valid['success'] = true;

@@ -12,9 +12,9 @@ if($_POST) {
   $brandName 			= $_POST['editBrandName'];
   $categoryName 	= $_POST['editCategoryName'];
   $productStatus 	= $_POST['editProductStatus'];
-
+	$prodDesc = addslashes($_POST["editProdDesc"]);
 				
-	$sql = "UPDATE ".$db_prefix."product SET product_name = '$productName', brand_id = '$brandName', categories_id = '$categoryName', quantity = '$quantity', rate = '$rate', active = '$productStatus', status = 1 WHERE product_id = $productId ";
+	$sql = "UPDATE ".$db_prefix."product SET product_name = '$productName', brand_id = '$brandName', categories_id = '$categoryName', quantity = '$quantity', rate = '$rate', active = '$productStatus', status = 1, description='$prodDesc' WHERE product_id = $productId ";
 
 	if($connect->query($sql) === TRUE) {
 		$valid['success'] = true;

@@ -465,22 +465,25 @@ function addRow() {
 					tr += '</select>'+
 					'</div>'+
 				'</td>'+
-				'<td style="padding-left:20px;"">'+
-					'<input type="text" name="rate[]" id="rate'+count+'" autocomplete="off" disabled="true" class="form-control" />'+
+				'<td>'+
+				'<input type="text" name="description[]" id="description'+count+'" autocomplete="off" class="form-control input-sm">'+
+			'	</td>'+
+				'<td>'+
+					'<input type="text" name="rate[]" id="rate'+count+'" autocomplete="off" disabled="true" class="form-control small-input" />'+
 					'<input type="hidden" name="rateValue[]" id="rateValue'+count+'" autocomplete="off" class="form-control" />'+
-				'</td style="padding-left:20px;">'+
-				'<td style="padding-left:20px;">'+
+				'</td>'+
+				'<td>'+
 					'<div class="form-group">'+
 					'<p id="available_quantity'+count+'"></p>'+
 					'</div>'+
 				'</td>'+
-				'<td style="padding-left:20px;">'+
+				'<td>'+
 					'<div class="form-group">'+
-					'<input type="number" name="quantity[]" id="quantity'+count+'" onkeyup="getTotal('+count+')" onclick="getTotal('+count+')" autocomplete="off" class="form-control" min="1" />'+
+					'<input type="number" name="quantity[]" id="quantity'+count+'" onkeyup="getTotal('+count+')" onclick="getTotal('+count+')" autocomplete="off" class="form-control  small-input" min="1" />'+
 					'</div>'+
 				'</td>'+
-				'<td style="padding-left:20px;">'+
-					'<input type="text" name="total[]" id="total'+count+'" autocomplete="off" class="form-control" disabled="true" />'+
+				'<td>'+
+					'<input type="text" name="total[]" id="total'+count+'" autocomplete="off" class="form-control  small-input" disabled="true" />'+
 					'<input type="hidden" name="totalValue[]" id="totalValue'+count+'" autocomplete="off" class="form-control" />'+
 				'</td>'+
 				'<td>'+
@@ -559,6 +562,7 @@ function getProductData(row = null) {
 					total = total.toFixed(2);
 					$("#total"+row).val(total);
 					$("#totalValue"+row).val(total);
+					$("#description"+row).val(response.description);
 					
 					// check if product name is selected
 					// var tableProductLength = $("#productTable tbody tr").length;					
