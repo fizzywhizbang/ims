@@ -215,6 +215,8 @@ if($_GET['o'] == 'add') {
 				      	<option value="1">Check</option>
 				      	<option value="2">Cash</option>
 								<option value="3">Credit Card</option>
+								<option value="4">Trade</option>
+								<option value="5">Estimate/Quote</option>
 				      </select>
 				    </div>
 				    <label for="subTotal" class="col-sm-3 control-label">Subtotal</label>
@@ -536,7 +538,13 @@ if($_GET['o'] == 'add') {
 				      	} ?>  >Cash</option>
 				      	<option value="3" <?php if($data[11] == 3) {
 				      		echo "selected";
-				      	} ?> >Credit Card</option>
+								} ?> >Credit Card</option>
+								<option value="4" <?php if($data[11] == 4) {
+				      		echo "selected";
+								} ?>>Trade</option>
+								<option value="5" <?php if($data[11] == 5) {
+				      		echo "selected";
+								} ?>>Estimate/Quote</option>
 				      </select>
 				    </div>
 				    <label for="subTotal" class="col-sm-3 control-label">Subtotal</label>
@@ -667,7 +675,7 @@ if($_GET['o'] == 'add') {
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title"><i class="glyphicon glyphicon-edit"></i> Edit Payment</h4>
+        <h4 class="modal-title"><i class="fas fa-edit"></i> Edit Payment</h4>
       </div>      
 
       <div class="modal-body form-horizontal" style="max-height:500px; overflow:auto;" >
@@ -694,7 +702,9 @@ if($_GET['o'] == 'add') {
 			      	<option value="">~~SELECT~~</option>
 			      	<option value="1">Cheque</option>
 			      	<option value="2">Cash</option>
-			      	<option value="3">Credit Card</option>
+							<option value="3">Credit Card</option>
+							<option value="4">Trade</option>
+								<option value="5">Estimate/Quote</option>
 			      </select>
 			    </div>
 			  </div> <!--/form-group-->							  
