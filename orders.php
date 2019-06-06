@@ -68,6 +68,26 @@ if($_GET['o'] == 'add') {
 			
 		<?php if($_GET['o'] == 'add') { 
 			// add order
+
+				$clientName="";
+				$clientPhone="";
+				$clientAddress="";
+				$clientCity="";
+				$clientState="";
+				$clientZip="";
+				$client_id="";
+			if(isset($_GET['clientID'])){
+				$query="select * from " . $db_prefix ."clients where id_clients=" . $_GET['clientID'];
+				$client_result=$connect->query($query);
+				$clientData=$client_result->fetch_row();
+				$clientName=$clientData[1];
+				$clientPhone=$clientData[2];
+				$clientAddress=$clientData[4];
+				$clientCity=$clientData[5];
+				$clientState=$clientData[6];
+				$clientZip=$clientData[7];
+				$client_id=$clientData[0];
+			}
 			?>			
 
 			<div class="success-messages"></div> <!--/success-messages-->
@@ -82,7 +102,7 @@ if($_GET['o'] == 'add') {
 					<label for="blank" class="col-sm-2 control-label"></label>
 					<label for="clientName" class="col-sm-2 control-label">Client Name</label>
 			    <div class="col-sm-5">
-			      <input type="text" class="form-control" id="clientName" name="clientName"  placeholder="Client Name" autocomplete="off" />
+			      <input type="text" class="form-control" id="clientName" name="clientName" value="<?PHP echo $clientName;?>"  placeholder="Client Name" autocomplete="off" />
 			    </div>
 			  </div> <!--/form-group-->
 			  <div class="row">
@@ -93,7 +113,7 @@ if($_GET['o'] == 'add') {
 					<label for="blank" class="col-sm-2 control-label"></label>
 					<label for="clientName" class="col-sm-2 control-label">Address</label>
 			    <div class="col-sm-5">
-			      <input type="text" class="form-control" id="clientAddr" name="clientAddr" placeholder="Address" autocomplete="off" />
+			      <input type="text" class="form-control" id="clientAddr" name="clientAddr" value="<?PHP echo $clientAddress;?>" placeholder="Address" autocomplete="off" />
 			    </div>
 				</div> <!--/form-group-->
 				<div class="form-row">
@@ -105,15 +125,15 @@ if($_GET['o'] == 'add') {
 			    <label for="clientContact" class="col-sm-2 control-label">City/ST/Zip</label>
 			    
 						<div class="col">
-						<input type="text" class="form-control" id="clientCity" name="clientCity" placeholder="City" autocomplete="off" />
+						<input type="text" class="form-control" id="clientCity" name="clientCity" value="<?PHP echo $clientCity;?>" placeholder="City" autocomplete="off" />
 						</div>
 						<div class="col">
-						<input type="text" class="form-control" id="clientState" name="clientState" placeholder="ST" autocomplete="off" />
+						<input type="text" class="form-control" id="clientState" name="clientState" placeholder="ST" value="<?PHP echo $clientState;?>" autocomplete="off" />
 						</div>
 						<div class="col">
-						<input type="text" class="form-control" id="clientZip" name="clientZip" placeholder="Zip" autocomplete="off" />
+						<input type="text" class="form-control" id="clientZip" name="clientZip" placeholder="Zip" value="<?PHP echo $clientZip;?>" autocomplete="off" />
 						</div>
-						<input type="hidden" name="client_id" id="client_id">
+						<input type="hidden" name="client_id" id="client_id" value="<?PHP echo $client_id;?>">
 						
 			    
 			  </div> <!--/form-group-->		
@@ -125,7 +145,7 @@ if($_GET['o'] == 'add') {
 					<label for="blank" class="col-sm-2 control-label"></label>
 			    <label for="clientContact" class="col-sm-2 control-label">Phone</label>
 			    <div class="col-sm-5">
-			      <input type="text" class="form-control" id="clientContact" name="clientContact" placeholder="Contact Number" autocomplete="off" />
+			      <input type="text" class="form-control" id="clientContact" name="clientContact" value="<?PHP echo $clientPhone;?>" placeholder="Contact Number" autocomplete="off" />
 			    </div>
 			  </div> <!--/form-group-->			  
 	<!-- end order form header -->

@@ -30,7 +30,8 @@ $email = $row[3];
 	  </button>
 	  <ul class="dropdown-menu">
 	    <li><a class="dropdown-item" data-toggle="modal" id="editUserModalBtn" data-target="#editUserModal" onclick="editUser('.$userid.')"> <i class="fas fa-edit"></i> Edit</a></li>
-	    <li><a class="dropdown-item" data-toggle="modal" data-target="#removeUserModal" id="removeUserModalBtn" onclick="removeUser('.$userid.')"> <i class="fas fa-trash"></i> Remove</a></li>       
+			<li><a class="dropdown-item" data-toggle="modal" data-target="#removeUserModal" id="removeUserModalBtn" onclick="removeUser('.$userid.')"> <i class="fas fa-trash"></i> Remove</a></li> 
+			<li><a class="dropdown-item" href="orders.php?o=add&clientID='.$userid.'"><i class="fas fa-shopping-cart"></i> Create Order</a></li>      
 	  </ul>
 	</div>';
 
