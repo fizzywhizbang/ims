@@ -22,9 +22,10 @@ if($_POST) {
 	$paymentPlace = $_POST['paymentPlace'];
 	$gstn = $_POST['gstn'];
 	$userid = $_SESSION['userId'];
-	$orderNumber = $_POST['orderNumber'];			
+	$orderNumber = $_POST['orderNumber'];	
+	$notes = addslashes($_POST["notes"]);		
 	//update base order data
-	$sql = "UPDATE ".$db_prefix."orders SET order_date = '$orderDate', client_name = '$clientName', client_contact = '$clientContact', sub_total = '$subTotalValue', vat = '$vatValue', total_amount = '$totalAmountValue', discount = '$discount', grand_total = '$grandTotalValue', paid = '$paid', due = '$dueValue', payment_type = '$paymentType', payment_status = '$paymentStatus', order_status = 1 ,user_id = '$userid',payment_place = '$paymentPlace' , gstn = '$gstn', orderid='$orderNumber' WHERE order_id = {$orderId}";	
+	$sql = "UPDATE ".$db_prefix."orders SET order_date = '$orderDate', client_name = '$clientName', client_contact = '$clientContact', sub_total = '$subTotalValue', vat = '$vatValue', total_amount = '$totalAmountValue', discount = '$discount', grand_total = '$grandTotalValue', paid = '$paid', due = '$dueValue', payment_type = '$paymentType', payment_status = '$paymentStatus', order_status = 1 ,user_id = '$userid',payment_place = '$paymentPlace' , gstn = '$gstn', orderid='$orderNumber', notes='$notes' WHERE order_id = {$orderId}";	
 	$connect->query($sql);
 	/// end update static
 

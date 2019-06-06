@@ -21,7 +21,6 @@ if($result->num_rows > 0) {
  	$itemCountResult = $connect->query($countOrderItemSql);
  	$itemCountRow = $itemCountResult->fetch_row();
 
-
  	// active 
  	if($row[4] == 1) { 		
  		$paymentStatus = "<label class='label label-success'>Full Payment</label>";

@@ -129,6 +129,20 @@ if($_GET['o'] == 'add') {
 			    </div>
 			  </div> <!--/form-group-->			  
 	<!-- end order form header -->
+
+	<!-- notes -->
+	<div class="row">
+		<div class="col-lg-12">
+		<label for="notes" class="control-label float-left">&nbsp;Notes</label>
+		</div>
+	
+		<div class="col-xl-12">
+			
+			<textarea rows="4" class="form-control" style="width:95%; display: block; margin-left: auto; margin-right: auto;" name="notes" id="notes"></textarea>
+		</div>
+		
+	</div>
+	<!-- end notes -->
 			  <table class="table" id="productTable">
 			  	<thead>
 			  		<tr>			  			
@@ -244,8 +258,9 @@ if($_GET['o'] == 'add') {
 				    
 				  </div> <!--/form-group-->	
 				  <div class="row">
-					<label for="blank" class="col-sm-3 control-label"></label>
-				    <div class="col-sm-3">	      
+									<label for="blank" class="col-sm-3 control-label"></label>
+				    <div class="col-sm-3">
+							
 				    </div>
 				    <label for="grandTotal" class="col-sm-3 control-label">Grand Total</label>
 				    <div class="col-sm-3">
@@ -338,7 +353,7 @@ if($_GET['o'] == 'add') {
 
   			<?php $orderId = $_GET['i'];
 
-  			$sql = "SELECT ".$db_prefix."orders.order_id, ".$db_prefix."orders.order_date, ".$db_prefix."orders.client_name, ".$db_prefix."orders.client_contact, ".$db_prefix."orders.sub_total, ".$db_prefix."orders.vat, ".$db_prefix."orders.total_amount, ".$db_prefix."orders.discount, ".$db_prefix."orders.grand_total, ".$db_prefix."orders.paid, ".$db_prefix."orders.due, ".$db_prefix."orders.payment_type, ".$db_prefix."orders.payment_status,".$db_prefix."orders.payment_place,".$db_prefix."orders.gstn FROM ".$db_prefix."orders 	
+  			$sql = "SELECT ".$db_prefix."orders.order_id, ".$db_prefix."orders.order_date, ".$db_prefix."orders.client_name, ".$db_prefix."orders.client_contact, ".$db_prefix."orders.sub_total, ".$db_prefix."orders.vat, ".$db_prefix."orders.total_amount, ".$db_prefix."orders.discount, ".$db_prefix."orders.grand_total, ".$db_prefix."orders.paid, ".$db_prefix."orders.due, ".$db_prefix."orders.payment_type, ".$db_prefix."orders.payment_status,".$db_prefix."orders.payment_place,".$db_prefix."orders.gstn, ".$db_prefix."orders.notes FROM ".$db_prefix."orders 	
 					WHERE ".$db_prefix."orders.order_id = {$orderId}";
 
 				$result = $connect->query($sql);
@@ -407,7 +422,19 @@ if($_GET['o'] == 'add') {
 			      <input type="text" class="form-control" id="clientContact" value="<?PHP echo $clientData[2]; ?>" name="clientContact" readonly="readonly" placeholder="Contact Number" autocomplete="off" />
 			    </div>
 			  </div> <!--/form-group-->	
-
+	<!-- notes -->
+	<div class="row">
+		<div class="col-lg-12">
+		<label for="notes" class="control-label float-left">&nbsp;Notes</label>
+		</div>
+	
+		<div class="col-xl-12">
+			
+			<textarea rows="4" class="form-control" style="width:95%; display: block; margin-left: auto; margin-right: auto;" name="notes" id="notes"><?PHP echo $data[15]; ?></textarea>
+		</div>
+		
+	</div>
+	<!-- end notes -->
 			  <table class="table" id="productTable">
 			  	<thead>
 			  		<tr>			  			

@@ -22,14 +22,14 @@ if($_POST) {
   $gstn 				= $_POST['gstn'];
   $userid 				= $_SESSION['userId'];
 
-
+	$notes = addslashes($_POST["notes"]);
 
   
 
   //create pretty order id
 
 				
-  $sql = "INSERT INTO ".$db_prefix."orders (order_date, client_name, client_contact, sub_total, vat, total_amount, discount, grand_total, paid, due, payment_type, payment_status,payment_place, gstn,order_status,user_id) VALUES ('$orderDate', '$clientName', '$clientContact', '$subTotalValue', '$vatValue', '$totalAmountValue', '$discount', '$grandTotalValue', '$paid', '$dueValue', $paymentType, $paymentStatus,$paymentPlace,$gstn, 1,$userid)";
+  $sql = "INSERT INTO ".$db_prefix."orders (order_date, client_name, client_contact, sub_total, vat, total_amount, discount, grand_total, paid, due, payment_type, payment_status,payment_place, gstn,order_status,user_id,notes) VALUES ('$orderDate', '$clientName', '$clientContact', '$subTotalValue', '$vatValue', '$totalAmountValue', '$discount', '$grandTotalValue', '$paid', '$dueValue', $paymentType, $paymentStatus,$paymentPlace,$gstn, 1,$userid,'$notes')";
 	
   $order_id;
   $orderStatus = false;
