@@ -23,7 +23,9 @@ $userwisesql = "SELECT ".$db_prefix."users.username , SUM(".$db_prefix."orders.g
 $userwiseQuery = $connect->query($userwisesql);
 $userwieseOrder = $userwiseQuery->num_rows;
 
-
+$customerSql = "select * from " . $db_prefix . "clients order by client_name";
+$customerQuery = $connect->query($customerSql);
+$customerCount = $customerQuery->num_rows;
 
 ?>
 
@@ -116,14 +118,31 @@ $userwieseOrder = $userwiseQuery->num_rows;
 		    <p>Total Revenue</p>
 		  </div>
 		</div> 
+		<br>
+	<div class="card">
+	<a href="addressbook.php" style="text-decoration:none;color:black;">
+		  <div class="cardHeader alert-success">
+		    <h1><?php if($customerCount) {
+		    	echo $customerCount;
+		    	} else {
+		    		echo '0';
+						} 
+						
+						?></h1>
+		  </div>
 
+		  <div class="cardContainer">
+		    <p>Customers</p>
+			</div>
+		</div> 
+					</a>
 	</div>
 	
 	<?php  if(isset($_SESSION['userId']) && $_SESSION['userId']==1) { ?>
 	<div class="col-md-8">
 		<div class="card">
 			<div class="card-header bg-light text-blue"> 
-		<div class="float-left"> <i class="fas fa-calendar text-blue"></i> Orders</div>
+		<div class="float-left"> <i class="fas fa-calendar text-blue"></i> Orders by sales person</div>
 		<div class="float-right"><a href="orders.php?o=add" class="text-blue"><i class="fas fa-plus-square"></i></a> </div>
 		<br>
 		</div>
@@ -139,14 +158,14 @@ $userwieseOrder = $userwiseQuery->num_rows;
 					<?php while ($orderResult = $userwiseQuery->fetch_assoc()) { ?>
 						<tr>
 							<td><?php echo $orderResult['username']?></td>
-							<td><?php echo $orderResult['totalorder']?></td>
+							<td>$<?php echo $orderResult['totalorder']?></td>
 							
 						</tr>
 						
 					<?php } ?>
 				</tbody>
 				</table>
-				<!--<div id="calendar"></div>-->
+				<!-- <div id="calendar"></div> -->
 			</div>	
 		</div>
 		
