@@ -24,8 +24,10 @@
 				<table class="table" id="manageUserTable">
 					<thead>
 						<tr>
-							<th style="width:10%;">Contact Name</th>
-							<th style="width:15%;">Options</th>
+							<th>Contact Name</th>
+							<th >Phone Number</th>
+							<th>Email</th>
+							<th>Options</th>
 						</tr>
 					</thead>
 				</table>
@@ -67,7 +69,7 @@
 	        	<label for="phone" class="col-sm-3 control-label">Phone: </label>
 	        	
 				    <div class="col-sm-8">
-				      <input type="text" class="form-control" id="phone" placeholder="Phone" name="phone" autocomplete="off">
+				      <input type="text" class="form-control phone" id="phone" placeholder="Phone" name="phone" autocomplete="off">
 				    </div>
 	        </div> <!-- /form-group-->	        	 
 
@@ -176,7 +178,7 @@
 	        	<label for="phone" class="col-sm-3 control-label">Phone: </label>
 	        	
 				    <div class="col-sm-8">
-				      <input type="text" class="form-control" id="ephone" placeholder="Phone" name="phone" autocomplete="off">
+				      <input type="text" class="form-control phone" id="ephone" placeholder="Phone" name="phone" autocomplete="off">
 				    </div>
 	        </div> <!-- /form-group-->	        	 
 
@@ -275,8 +277,6 @@
 </form>
 </div><!-- /.modal -->
 <!-- /categories brand -->
-
-
 <script src="custom/js/addressbook.js"></script>
 
 <?php require_once 'includes/footer.php'; ?>

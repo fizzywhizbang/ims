@@ -19,6 +19,10 @@ if($result->num_rows > 0) {
  	// active 
  	$username = $row[1];
 
+$phone = $row[2];
+
+$email = $row[3];
+
  	$button = '<!-- Single button -->
 	<div class="btn-group">
 	  <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -34,7 +38,11 @@ if($result->num_rows > 0) {
 
  	$output['data'][] = array( 		
  		// name
- 		$username,
+		 $username,
+		 //phone
+		 $phone,
+		 //email
+		 $email,
  		// button
  		$button 		
  		); 	

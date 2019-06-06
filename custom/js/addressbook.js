@@ -3,6 +3,12 @@ var manageUserTable;
 $(document).ready(function() {
 	// top nav bar 
 	$('#navAddrbook').addClass('active');
+
+	$(document).ready(function(){
+		$('.phone').mask('(000) 000-0000');
+	});	
+
+
 	// manage product data table
 	manageUserTable = $('#manageUserTable').DataTable({
 		'ajax': 'php_action/fetchClientList.php',
@@ -153,7 +159,8 @@ function editUser(userid = null) {
                 $("#estate").val(response.client_state);
                 $("#ecity").val(response.client_city);
                 $("#ezip").val(response.client_zip);
-                $("#einfo").val(response.client_info);
+								$("#einfo").val(response.client_info);
+								$("#euemail").val(response.client_email);
 				
 				
 				// update the product data function
@@ -228,14 +235,17 @@ function editUser(userid = null) {
 				          '</div>');
 
 									// remove the mesages
-				          $(".alert-success").delay(500).show(10, function() {
+				          $(".alert-success").delay(300).show(10, function() {
 										$(this).delay(3000).hide(10, function() {
 											$(this).remove();
+											//location.reload();
 										});
 									}); // /.alert
 
 				          // reload the manage student table
 									manageUserTable.ajax.reload(null, true);
+
+									
 
 									// remove text-error 
 									$(".text-danger").remove();
