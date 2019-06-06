@@ -41,6 +41,7 @@
     <?php } ?>   
 		<?php  if(isset($_SESSION['userId']) && $_SESSION['userId']==1) { ?>
         <li id="navReport"><a class="nav-link" href="report.php"> <i class="fas fa-check    "></i> Report </a></li>
+        <li id="navSystem"><a class="nav-link" href="system.php"><i class="fas fa-cog"></i> System Settings </a></li> 
     <?php } ?>   
     
         <li class="nav-item dropdown" id="navSetting">
@@ -52,7 +53,7 @@
 <?php } ?>              
             <li class="dropdown-item" id="topNavLogout"><a class="dropdown-item" href="logout.php"> <i class="fas fa-lock    "></i> Logout</a></li>   
             <?php if(isset($_SESSION['userId']) && $_SESSION['userId']==1) { ?>
-        <li class="nav-item" id="navSystem"><a class="nav-link" href="system.php"><i class="fas fa-cog"></i> System Settings </a></li> 
+       
 		<?php } ?>         
           </ul>
         </li>        
