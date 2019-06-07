@@ -30,7 +30,7 @@ if($_POST) {
 
 				
   $sql = "INSERT INTO ".$db_prefix."orders (order_date, client_name, client_contact, sub_total, vat, total_amount, discount, grand_total, paid, due, payment_type, payment_status,payment_place, gstn,order_status,user_id,notes) VALUES ('$orderDate', '$clientName', '$clientContact', '$subTotalValue', '$vatValue', '$totalAmountValue', '$discount', '$grandTotalValue', '$paid', '$dueValue', $paymentType, $paymentStatus,$paymentPlace,$gstn, 1,$userid,'$notes')";
-	
+
   $order_id;
   $orderStatus = false;
   if($connect->query($sql) === true) {
@@ -44,6 +44,8 @@ if($_POST) {
 		
 	// echo $_POST['productName'];
 	$orderItemStatus = false;
+if($orderStatus==true){
+
 
 	for($x = 0; $x < count($_POST['productName']); $x++) {			
 		$updateProductQuantitySql = "SELECT ".$db_prefix."product.quantity FROM ".$db_prefix."product WHERE ".$db_prefix."product.product_id = ".$_POST['productName'][$x]."";
@@ -67,7 +69,7 @@ if($_POST) {
 				}		
 		} // while	
 	} // /for quantity
-
+} //order status true
 	$valid['success'] = true;
 	$valid['messages'] = "Successfully Added";		
 	

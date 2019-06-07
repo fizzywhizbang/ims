@@ -183,15 +183,15 @@ $(document).ready(function() {
 							
 							$(".text-danger").remove();
 							$('.form-group').removeClass('has-error').removeClass('has-success');
-
+								
 							if(response.success == true) {
 								
 								// create order button
 								$(".success-messages").html('<div class="alert alert-success">'+
 	            	'<button type="button" class="close" data-dismiss="alert">&times;</button>'+
-	            	'<strong><i class="glyphicon glyphicon-ok-sign"></i></strong> '+ response.messages +
-	            	' <br /> <br /> <a type="button" onclick="printOrder('+response.order_id+')" class="btn btn-primary"> <i class="glyphicon glyphicon-print"></i> Print </a>'+
-	            	'<a href="orders.php?o=add" class="btn btn-default" style="margin-left:10px;"> <i class="glyphicon glyphicon-plus-sign"></i> Add New Order </a>'+
+	            	'<strong><i class="fas fa-thumbs-up"></i></strong> '+ response.messages +
+	            	' <br /> <br /> <a type="button" onclick="printOrder('+response.order_id+')" class="btn btn-primary"> <i class="fas fa-print"></i> Print </a>'+
+	            	'<a href="orders.php?o=add" class="btn btn-default" style="margin-left:10px;"> <i class="fas fa-plus"></i> Add New Order </a>'+
 	            	
 	   		       '</div>');
 								
@@ -393,34 +393,8 @@ $(document).ready(function() {
 // print order function
 function printOrder(orderId = null) {
 	if(orderId) {		
-			
-		$.ajax({
-			url: 'php_action/printOrder.php',
-			type: 'post',
-			data: {orderId: orderId},
-			dataType: 'text',
-			success:function(response) {
-				
-				var mywindow = window.open('', 'Stock Management System', 'height=400,width=600');
-        mywindow.document.write('<html><head><title>Order Invoice</title>');        
-        mywindow.document.write('</head><body>');
-        mywindow.document.write(response);
-        mywindow.document.write('</body></html>');
-
-        mywindow.document.close(); // necessary for IE >= 10
-        mywindow.focus(); // necessary for IE >= 10
-        mywindow.resizeTo(screen.width, screen.height);
-setTimeout(function() {
-    mywindow.print();
-    //mywindow.close();
-}, 1250);
-
-        //mywindow.print();
-        //mywindow.close();
-				
-			}// /success function
-		}); // /ajax function to fetch the printable order
-	} // /if orderId
+		window.open("php_action/printOrder.php?orderId=" + orderId,"_blank");
+	}
 } // /print order function
 
 function addRow() {

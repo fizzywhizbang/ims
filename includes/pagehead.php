@@ -27,4 +27,4 @@
   <link rel="stylesheet" href="assets/plugins/fileinput/css/fileinput.min.css">
   
   <!-- print pdf -->
-  <!-- <script src="https://unpkg.com/jspdf@latest/dist/jspdf.min.js"></script> -->
+  <script src="https://unpkg.com/jspdf@latest/dist/jspdf.min.js"></script>

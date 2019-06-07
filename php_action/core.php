@@ -4,6 +4,7 @@ session_start();
 require_once 'db_connect.php';
 require_once("functions.php");
 //get system information
+setlocale(LC_MONETARY, 'en_US');
 
 $sql = "SELECT * FROM ".$db_prefix."system WHERE id = 1";
 $query = $connect->query($sql);
@@ -23,8 +24,7 @@ $ims_tax = $result['tax'];
 
 
 // echo $_SESSION['userId'];
-
-if(!isset($_SESSION['userId'])) {
+if(!isset($_SESSION['userId']) && !isset($ignoreAuth)) {
 	header('Location: index.php');	
 } 
 
