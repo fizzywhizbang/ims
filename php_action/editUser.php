@@ -3,7 +3,6 @@
 require_once 'core.php';
 
 $valid['success'] = array('success' => false, 'messages' => array());
-
 if($_POST) {
 	$edituserName = $_POST['edituserName'];
 	$editPassword 		= md5($_POST['editPassword']);

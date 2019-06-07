@@ -95,7 +95,7 @@ $(document).ready(function() {
 							// shows a successful message after operation
 							$('#add-user-messages').html('<div class="alert alert-success">'+
 		            '<button type="button" class="close" data-dismiss="alert">&times;</button>'+
-		            '<strong><i class="glyphicon glyphicon-ok-sign"></i></strong> '+ response.messages +
+		            '<strong><i class="fas fa-thumbs-up"></i></strong> '+ response.messages +
 		          '</div>');
 
 							// remove the mesages
@@ -227,7 +227,7 @@ function editUser(userid = null) {
 									// shows a successful message after operation
 									$('#edit-user-messages').html('<div class="alert alert-success">'+
 				            '<button type="button" class="close" data-dismiss="alert">&times;</button>'+
-				            '<strong><i class="glyphicon glyphicon-ok-sign"></i></strong> '+ response.messages +
+				            '<strong><i class="fas fa-thumbs-up"></i></strong> '+ response.messages +
 				          '</div>');
 
 									// remove the mesages
