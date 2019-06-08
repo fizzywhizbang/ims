@@ -11,7 +11,7 @@ if($_POST) {
 	$conformPassword = md5($_POST['cpassword']);
 	$userId = $_POST['user_id'];
 
-	$sql ="SELECT * FROM users WHERE user_id = {$userId}";
+	$sql ="SELECT * FROM ".$db_prefix."users WHERE user_id = {$userId}";
 	$query = $connect->query($sql);
 	$result = $query->fetch_assoc();
 

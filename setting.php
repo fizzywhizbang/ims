@@ -12,13 +12,13 @@ $connect->close();
 <div class="row">
 	<div class="col-md-12">
 		<ol class="breadcrumb">
-			<li><a href="dashboard.php">Home</a></li>
-			<li class="active">Setting</li>
+			<li class="breadcrumb-item"><a href="dashboard.php">Home</a></li>
+			<li class="breadcrumb-item active">Setting</li>
 		</ol>
 
 		<div class="panel panel-default">
 			<div class="panel-heading">
-				<div class="page-heading"> <i class="glyphicon glyphicon-wrench"></i> Setting</div>
+				<div class="page-heading"> <i class="fas fa-wrench"></i> Setting</div>
 			</div> <!-- /panel-heading -->
 
 			<div class="panel-body">
@@ -34,14 +34,14 @@ $connect->close();
 						<div class="form-group">
 							<label for="username" class="col-sm-2 control-label">Username</label>
 							<div class="col-sm-10">
-								<input type="text" class="form-control" id="username" name="username" placeholder="Usename" value="<?php echo $result['username']; ?>" />
+								<input type="text" class="form-control" id="username" name="username" placeholder="Username" value="<?php echo $result['username']; ?>" />
 							</div>
 						</div>
 
 						<div class="form-group">
 							<div class="col-sm-offset-2 col-sm-10">
 								<input type="hidden" name="user_id" id="user_id" value="<?php echo $result['user_id'] ?>" />
-								<button type="submit" class="btn btn-success" data-loading-text="Loading..." id="changeUsernameBtn"> <i class="glyphicon glyphicon-ok-sign"></i> Save Changes </button>
+								<button type="submit" class="btn btn-success" data-loading-text="Loading..." id="changeUsernameBtn"> <i class="fas fa-thumbs-up"></i> Save Changes </button>
 							</div>
 						</div>
 					</fieldset>
@@ -77,7 +77,7 @@ $connect->close();
 						<div class="form-group">
 							<div class="col-sm-offset-2 col-sm-10">
 								<input type="hidden" name="user_id" id="user_id" value="<?php echo $result['user_id'] ?>" />
-								<button type="submit" class="btn btn-primary"> <i class="glyphicon glyphicon-ok-sign"></i> Save Changes </button>
+								<button type="submit" class="btn btn-primary"> <i class="fas fa-thumbs-up"></i> Save Changes </button>
 
 							</div>
 						</div>

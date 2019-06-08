@@ -38,7 +38,7 @@ $(document).ready(function() {
 						// shows a successful message after operation
 						$('.changeUsenrameMessages').html('<div class="alert alert-success">'+
 	            '<button type="button" class="close" data-dismiss="alert">&times;</button>'+
-	            '<strong><i class="glyphicon glyphicon-ok-sign"></i></strong> '+ response.messages +
+	            '<strong><i class="fas fa-thumbs-up"></i></strong> '+ response.messages +
 	          '</div>');
 
 						// remove the mesages
@@ -52,7 +52,7 @@ $(document).ready(function() {
 						// shows a successful message after operation
 						$('.changeUsenrameMessages').html('<div class="alert alert-warning">'+
 	            '<button type="button" class="close" data-dismiss="alert">&times;</button>'+
-	            '<strong><i class="glyphicon glyphicon-exclamation-sign"></i></strong> '+ response.messages +
+	            '<strong><i class="fas fa-exclamation"></i></strong> '+ response.messages +
 	          '</div>');
 
 						// remove the mesages
@@ -117,7 +117,7 @@ $(document).ready(function() {
 					if(response.success == true) {
 						$('.changePasswordMessages').html('<div class="alert alert-success">'+
 	            '<button type="button" class="close" data-dismiss="alert">&times;</button>'+
-	            '<strong><i class="glyphicon glyphicon-ok-sign"></i></strong> '+ response.messages +
+	            '<strong><i class="fas fa-thumbs-up"></i></strong> '+ response.messages +
 	          '</div>');
 
 						// remove the mesages
@@ -130,7 +130,7 @@ $(document).ready(function() {
 
 						$('.changePasswordMessages').html('<div class="alert alert-warning">'+
 	            '<button type="button" class="close" data-dismiss="alert">&times;</button>'+
-	            '<strong><i class="glyphicon glyphicon-exclamation-sign"></i></strong> '+ response.messages +
+	            '<strong><i class="fas fa-exclamation"></i></strong> '+ response.messages +
 	          '</div>');
 
 						// remove the mesages
