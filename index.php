@@ -1,7 +1,6 @@
 <?php 
-require_once 'php_action/db_connect.php';
-
-session_start();
+$ignoreAuth=true;
+require_once 'includes/core.php';
 
 if(isset($_SESSION['userId'])) {
 	header('location: dashboard.php');	
@@ -29,7 +28,7 @@ if($_POST) {
 		if($result->num_rows == 1) {
 			$password = md5($password);
 			// exists
-			$mainSql = "SELECT * FROM ".$db_prefix."users WHERE username = '$username' AND password = '$password'";
+			echo $mainSql = "SELECT * FROM ".$db_prefix."users WHERE username = '$username' AND password = '$password'";
 			$mainResult = $connect->query($mainSql);
 
 			if($mainResult->num_rows == 1) {
@@ -45,7 +44,7 @@ if($_POST) {
 				$errors[] = "Incorrect username/password combination";
 			} // /else
 		} else {		
-			$errors[] = "Username doesnot exists";		
+			$errors[] = "Username does not exists";		
 		} // /else
 	} // /else not empty username // password
 	
@@ -62,43 +61,45 @@ if($_POST) {
 <body>
 	<div class="container">
 		<div class="row vertical">
-			<div class="col-md-5 col-md-offset-4">
-				<div class="panel panel-info">
-					<div class="panel-heading">
-						<h3 class="panel-title">Please Sign in</h3>
+			<div class="col-md-4 col-md-offset-4">
+				<div class="card">
+					<div class="card-head">
+						<img src="assets/images/logo.png" class="col-sm-8">
 					</div>
-					<div class="panel-body">
+					<div class="card-head">
+						<h3 class="card-title">Please Sign in</h3>
+					</div>
+					<div class="card-body">
 
 						<div class="messages">
 							<?php if($errors) {
 								foreach ($errors as $key => $value) {
 									echo '<div class="alert alert-warning" role="alert">
-									<i class="glyphicon glyphicon-exclamation-sign"></i>
+									<i class="fas fa-exclamation"></i>
 									'.$value.'</div>';										
 									}
 								} ?>
 						</div>
-
 						<form class="form-horizontal" action="<?php echo $_SERVER['PHP_SELF'] ?>" method="post" id="loginForm">
-							<fieldset>
+							
 							  <div class="form-group">
-									<label for="username" class="col-sm-2 control-label">Username</label>
-									<div class="col-sm-10">
+									
+									<div class="col">
 									  <input type="text" class="form-control" id="username" name="username" placeholder="Username" autocomplete="off" />
 									</div>
 								</div>
 								<div class="form-group">
-									<label for="password" class="col-sm-2 control-label">Password</label>
-									<div class="col-sm-10">
+									
+									<div class="col">
 									  <input type="password" class="form-control" id="password" name="password" placeholder="Password" autocomplete="off" />
 									</div>
 								</div>								
 								<div class="form-group">
-									<div class="col-sm-offset-2 col-sm-10">
-									  <button type="submit" class="btn btn-default"> <i class="glyphicon glyphicon-log-in"></i> Sign in</button>
+									<div class="col">
+									  <button type="submit" class="btn btn-default"> <i class="fas fa-sign-in-alt"></i> Sign in</button>
 									</div>
 								</div>
-							</fieldset>
+							
 						</form>
 					</div>
 					<!-- panel-body -->

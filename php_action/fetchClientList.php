@@ -2,7 +2,7 @@
 
 
 
-require_once 'core.php';
+require_once '../includes/core.php';
 
 $sql = "SELECT * FROM ".$db_prefix."clients";
 

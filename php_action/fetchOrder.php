@@ -1,6 +1,6 @@
 <?php 	
 
-require_once 'core.php';
+require_once '../includes/core.php';
 
 $sql = "SELECT order_id, order_date, client_name, client_contact, payment_status, orderid FROM ".$db_prefix."orders WHERE order_status = 1";
 $result = $connect->query($sql);

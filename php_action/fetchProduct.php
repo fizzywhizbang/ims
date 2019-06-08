@@ -1,5 +1,5 @@
 <?php 	
-require_once 'core.php';
+require_once '../includes/core.php';
 
 $sql = "SELECT ".$db_prefix."product.product_id, ".$db_prefix."product.product_name, ".$db_prefix."product.product_image, ".$db_prefix."product.brand_id,
 ".$db_prefix."product.categories_id, ".$db_prefix."product.quantity, ".$db_prefix."product.rate, ".$db_prefix."product.active, ".$db_prefix."product.status, 

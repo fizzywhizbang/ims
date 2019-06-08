@@ -1,6 +1,6 @@
 <?php 	
 
-require_once 'core.php';
+require_once '../includes/core.php';
 
 $valid['success'] = array('success' => false, 'messages' => array(), 'order_id' => '');
 // print_r($valid);

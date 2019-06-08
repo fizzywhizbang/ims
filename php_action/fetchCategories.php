@@ -1,6 +1,6 @@
 <?php 	
 
-require_once 'core.php';
+require_once '../includes/core.php';
 
 $sql = "SELECT categories_id, categories_name, categories_active, categories_status FROM ".$db_prefix."categories WHERE categories_status = 1";
 $result = $connect->query($sql);

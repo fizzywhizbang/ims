@@ -1,6 +1,6 @@
 <?php 	
 
-require_once 'core.php';
+require_once '../includes/core.php';
 
 $sql = "SELECT brand_id, brand_name, brand_active, brand_status FROM ".$db_prefix."brands WHERE brand_status = 1";
 $result = $connect->query($sql);

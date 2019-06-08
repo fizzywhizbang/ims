@@ -5,6 +5,13 @@ Lightweight and easy to use
 Order management and product management can be done with ease
 Report management
 User wise sell report
+
+#To Install
+Import the sql into your database located under the database directory/folder
+Default username is: admin
+Default password is: adminims
+assets/images/stock must be writeable by the web server to upload images
+
 #Requirement
 Need to change
 $webroot = "ims/";

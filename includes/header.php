@@ -1,4 +1,5 @@
-<?php require_once 'php_action/core.php'; ?>
+<?php 
+require_once('includes/core.php'); ?>
 <!doctype html>
 <html lang="en">
   <head>

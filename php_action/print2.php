@@ -1,6 +1,6 @@
 <?php    
 $ignoreAuth=true;
-require_once 'core.php';
+require_once '../includes/core.php';
 
 $orderId = $_GET["orderId"];
 //phpinfo();

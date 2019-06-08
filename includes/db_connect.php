@@ -1,14 +1,5 @@
 <?php 	
-error_reporting(E_ALL);
-ini_set('display_errors', 1);
 
-date_default_timezone_set("America/Chicago");
-$webroot = "ims/";
-$db_prefix = "ims_";
-$localhost = "localhost";
-$username = "sparky";
-$password = "NGKD@t@b@se";
-$dbname = "sparky";
 
 // db connection
 $connect = new mysqli($localhost, $username, $password, $dbname);
