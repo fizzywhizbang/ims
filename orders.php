@@ -75,7 +75,7 @@ if($_GET['o'] == 'add') {
 				$clientCity="";
 				$clientState="";
 				$clientZip="";
-				$client_id="";
+				$client_id="new"; //setting client id to new just in case there is no client chosen
 			if(isset($_GET['clientID'])){
 				$query="select * from " . $db_prefix ."clients where id_clients=" . $_GET['clientID'];
 				$client_result=$connect->query($query);
@@ -145,7 +145,7 @@ if($_GET['o'] == 'add') {
 					<label for="blank" class="col-sm-2 control-label"></label>
 			    <label for="clientContact" class="col-sm-2 control-label">Phone</label>
 			    <div class="col-sm-5">
-			      <input type="text" class="form-control" id="clientContact" name="clientContact" value="<?PHP echo $clientPhone;?>" placeholder="Contact Number" autocomplete="off" />
+			      <input type="text" class="form-control phone" id="clientContact" name="clientContact" value="<?PHP echo $clientPhone;?>" placeholder="Contact Number" autocomplete="off" />
 			    </div>
 			  </div> <!--/form-group-->			  
 	<!-- end order form header -->

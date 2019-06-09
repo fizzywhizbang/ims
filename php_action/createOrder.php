@@ -6,6 +6,9 @@ $valid['success'] = array('success' => false, 'messages' => array(), 'order_id' 
 // print_r($valid);
 if($_POST) {	
 
+	
+
+
 	$orderDate 						= date('Y-m-d', strtotime($_POST['orderDate']));	
   $clientName 					= $_POST['client_id'];
   $clientContact 				= $_POST['clientContact'];
@@ -21,9 +24,21 @@ if($_POST) {
   $paymentPlace 				= $_POST['paymentPlace'];
   $gstn 				= $_POST['gstn'];
   $userid 				= $_SESSION['userId'];
+  $clientAddr = $_POST["clientAddr"];
+  $clientCity = $_POST["clientCity"];
+  $clientState = $_POST["clientState"];
+  $clientZip = $_POST["clientZip"];
+
 
 	$notes = addslashes($_POST["notes"]);
-
+//need to add if there is no client id to create the client on the fly
+if($_POST["client_id"]=="new"){
+	//add the client on the fly
+	$query="insert into ".$db_prefix."clients (client_name, client_phone, client_address, client_city, client_state,client_zip) values";
+	$query.="(\"".$_POST["clientName"]."\",\"".$clientContact."\",\"".$clientAddr."\",\"".$clientCity."\",\"".$clientState."\",\"".$clientZip."\")";
+	$connect->query($query);
+	$clientName=$connect->insert_id;
+}
   
 
   //create pretty order id

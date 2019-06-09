@@ -1,5 +1,7 @@
 var manageOrderTable;
-
+$(document).ready(function(){
+	$('.phone').mask('(000) 000-0000');
+});	
 $(document).ready(function() {
 	$("#paymentPlace").change(function(){
 		if($("#paymentPlace").val() == 2)
